@@ -34,6 +34,7 @@
             this.PictureBox = new System.Windows.Forms.PictureBox();
             this.CancelButton = new System.Windows.Forms.Button();
             this.OKButton = new System.Windows.Forms.Button();
+            this.PlayerSetterButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -96,11 +97,22 @@
             this.OKButton.UseVisualStyleBackColor = true;
             this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
             // 
+            // PlayerSetterButton
+            // 
+            this.PlayerSetterButton.Location = new System.Drawing.Point(343, 160);
+            this.PlayerSetterButton.Name = "PlayerSetterButton";
+            this.PlayerSetterButton.Size = new System.Drawing.Size(164, 23);
+            this.PlayerSetterButton.TabIndex = 7;
+            this.PlayerSetterButton.Text = "Place Machine here";
+            this.PlayerSetterButton.UseVisualStyleBackColor = true;
+            this.PlayerSetterButton.Click += new System.EventHandler(this.PlayerSetterButton_Click);
+            // 
             // TileProperties
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(531, 335);
+            this.Controls.Add(this.PlayerSetterButton);
             this.Controls.Add(this.OKButton);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.PictureBox);
@@ -124,5 +136,6 @@
         private System.Windows.Forms.PictureBox PictureBox;
         private System.Windows.Forms.Button CancelButton;
         private System.Windows.Forms.Button OKButton;
+        private System.Windows.Forms.Button PlayerSetterButton;
     }
 }

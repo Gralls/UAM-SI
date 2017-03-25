@@ -42,10 +42,7 @@ namespace SZI
 
         }
 
-        private void startToolStripMenuItem_Click(object sender, EventArgs e)
-        {
 
-        }
 
         private void gridClick(object sender, EventArgs e)
         {

@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,14 +15,15 @@ namespace SZI
 {
     public partial class TileProperties : Form
     {
-        public static String spritesLocation = @"C:\Users\Michał\Desktop\sprite";
+        public static String spritesLocation;
         private Button senderGridCell;
-        private String currentImagePath;
+        private String currentImagePath = null;
+        private bool playerSetOnThisTile = false;
         public TileProperties(object sender)
         {
             InitializeComponent();
             senderGridCell = (Button)sender;
-            //look what happens when you will not have double backslashes
+            spritesLocation = Path.Combine(Environment.CurrentDirectory, "..\\..\\res\\sprites");
             PopulateListBox(ImageListBox, spritesLocation, "*.jpg");
         }
 
@@ -47,8 +49,16 @@ namespace SZI
 
         private void OKButton_Click(object sender, EventArgs e)
         {
-            senderGridCell.BackgroundImage = Image.FromFile(currentImagePath);
-            senderGridCell.BackgroundImageLayout = ImageLayout.Stretch;
+            if (currentImagePath != null)
+            {
+                senderGridCell.BackgroundImage = Image.FromFile(currentImagePath);
+                senderGridCell.BackgroundImageLayout = ImageLayout.Stretch;
+            }
+            if (playerSetOnThisTile)
+            {
+                senderGridCell.Image = Image.FromFile(spritesLocation + "\\machine.png");
+                senderGridCell.ImageAlign = ContentAlignment.MiddleCenter;
+            }
             this.Close();
         }
         private void PopulateListBox(ListBox lsb, string Folder, string FileType)
@@ -73,6 +83,11 @@ namespace SZI
             PictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             PictureBox.Image = Image.FromFile(currentImagePath);
             
+        }
+
+        private void PlayerSetterButton_Click(object sender, EventArgs e)
+        {
+            playerSetOnThisTile = true;
         }
     }
 }
