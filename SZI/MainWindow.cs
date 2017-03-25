@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace SZI
 {
-    public partial class Form1 : Form
+    public partial class MainWindow : Form
     {
-        public Form1()
+        public MainWindow()
         {
             InitializeComponent();
         }
@@ -35,6 +35,23 @@ namespace SZI
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Project for SZI", "About");
+        }
+
+        private void MainWindow_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void startToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gridClick(object sender, EventArgs e)
+        {
+            TileProperties tileProperties = new TileProperties();
+            Button button = (Button)sender;
+            tileProperties.Show();
         }
     }
 }
