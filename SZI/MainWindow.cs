@@ -49,8 +49,8 @@ namespace SZI
 
         private void gridClick(object sender, EventArgs e)
         {
-            TileProperties tileProperties = new TileProperties();
             Button button = (Button)sender;
+            TileProperties tileProperties = new TileProperties(button);
             tileProperties.Show();
         }
     }

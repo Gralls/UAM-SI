@@ -28,33 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.Title = new System.Windows.Forms.Label();
+            this.ImageListBox = new System.Windows.Forms.ListBox();
             this.Type = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.PictureBox = new System.Windows.Forms.PictureBox();
             this.CancelButton = new System.Windows.Forms.Button();
             this.OKButton = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.SuspendLayout();
             // 
-            // listBox1
+            // ImageListBox
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(12, 12);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(301, 303);
-            this.listBox1.TabIndex = 0;
-            // 
-            // Title
-            // 
-            this.Title.AutoSize = true;
-            this.Title.Location = new System.Drawing.Point(412, 143);
-            this.Title.Name = "Title";
-            this.Title.Size = new System.Drawing.Size(35, 13);
-            this.Title.TabIndex = 1;
-            this.Title.Text = "label1";
-            this.Title.Click += new System.EventHandler(this.label1_Click);
+            this.ImageListBox.FormattingEnabled = true;
+            this.ImageListBox.Location = new System.Drawing.Point(12, 12);
+            this.ImageListBox.Name = "ImageListBox";
+            this.ImageListBox.Size = new System.Drawing.Size(301, 303);
+            this.ImageListBox.TabIndex = 0;
+            this.ImageListBox.SelectedIndexChanged += new System.EventHandler(this.ImageListBoxSelectedIndexChanged);
             // 
             // Type
             // 
@@ -64,6 +54,7 @@
             this.Type.Size = new System.Drawing.Size(31, 13);
             this.Type.TabIndex = 2;
             this.Type.Text = "Type";
+            this.Type.Click += new System.EventHandler(this.Type_Click);
             // 
             // label3
             // 
@@ -75,13 +66,15 @@
             this.label3.Text = "Filename";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
-            // pictureBox1
+            // PictureBox
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(363, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(128, 128);
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
+            this.PictureBox.ErrorImage = null;
+            this.PictureBox.InitialImage = null;
+            this.PictureBox.Location = new System.Drawing.Point(363, 12);
+            this.PictureBox.Name = "PictureBox";
+            this.PictureBox.Size = new System.Drawing.Size(128, 128);
+            this.PictureBox.TabIndex = 4;
+            this.PictureBox.TabStop = false;
             // 
             // CancelButton
             // 
@@ -110,15 +103,14 @@
             this.ClientSize = new System.Drawing.Size(531, 335);
             this.Controls.Add(this.OKButton);
             this.Controls.Add(this.CancelButton);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.PictureBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.Type);
-            this.Controls.Add(this.Title);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.ImageListBox);
             this.Name = "TileProperties";
             this.Text = "TileProperties";
             this.Load += new System.EventHandler(this.TileProperties_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -126,11 +118,10 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Label Title;
+        private System.Windows.Forms.ListBox ImageListBox;
         private System.Windows.Forms.Label Type;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox PictureBox;
         private System.Windows.Forms.Button CancelButton;
         private System.Windows.Forms.Button OKButton;
     }

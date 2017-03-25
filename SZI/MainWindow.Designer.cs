@@ -99,6 +99,7 @@
             this.grid10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.grid10.Cursor = System.Windows.Forms.Cursors.Default;
             this.grid10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.grid10.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.grid10.Location = new System.Drawing.Point(82, 27);
             this.grid10.Name = "grid10";
             this.grid10.Size = new System.Drawing.Size(64, 64);
