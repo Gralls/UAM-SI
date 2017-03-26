@@ -7,3 +7,4 @@ C:\Users\Michał\Documents\Visual Studio 2017\Projects\SZI\SZI\obj\Debug\SZI.Til
 C:\Users\Michał\Documents\Visual Studio 2017\Projects\SZI\SZI\obj\Debug\SZI.csproj.GenerateResource.Cache
 C:\Users\Michał\Documents\Visual Studio 2017\Projects\SZI\SZI\obj\Debug\SZI.exe
 C:\Users\Michał\Documents\Visual Studio 2017\Projects\SZI\SZI\obj\Debug\SZI.pdb
+C:\Users\Michał\Documents\Visual Studio 2017\Projects\SZI\SZI\obj\Debug\SZI.csprojResolveAssemblyReference.cache

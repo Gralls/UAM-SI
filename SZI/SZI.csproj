@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Coordinates.cs" />
+    <Compile Include="MainLogic.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -59,6 +61,7 @@
     <Compile Include="TileProperties.Designer.cs">
       <DependentUpon>TileProperties.cs</DependentUpon>
     </Compile>
+    <Compile Include="TileToPositionMapper.cs" />
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>

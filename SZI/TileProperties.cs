@@ -78,10 +78,13 @@ namespace SZI
 
         private void ImageListBoxSelectedIndexChanged(object sender, System.EventArgs e)
         {
-            String filename = ImageListBox.SelectedItem.ToString();
-            currentImagePath = spritesLocation + "\\" + filename;
-            PictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            PictureBox.Image = Image.FromFile(currentImagePath);
+            if (ImageListBox.SelectedItem != null)
+            {
+                String filename = ImageListBox.SelectedItem.ToString();
+                currentImagePath = spritesLocation + "\\" + filename;
+                PictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                PictureBox.Image = Image.FromFile(currentImagePath);
+            }
             
         }
 
