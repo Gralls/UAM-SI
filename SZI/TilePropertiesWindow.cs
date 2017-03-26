@@ -62,7 +62,7 @@ namespace SZI
                 Coordinates actualPlayerPosition = MainLogic.Instance.GetActualPlayerPosition();
                 if (actualPlayerPosition != null)
                 {
-                    PositionToTileMapper.getTile(actualPlayerPosition).Image = null;
+                    PositionToTileMapper.GetTile(actualPlayerPosition).Image = null;
                 }
                 MainLogic.Instance.SetActualPlayerPosition(TileToPositionMapper.getPosition(this.senderGridCell));
                 senderGridCell.Image = Image.FromFile(spritesLocation + "\\machine.png");

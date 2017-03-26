@@ -50,5 +50,15 @@ namespace SZI
             TilePropertiesWindow tileProperties = new TilePropertiesWindow(button);
             tileProperties.Show();
         }
+
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
