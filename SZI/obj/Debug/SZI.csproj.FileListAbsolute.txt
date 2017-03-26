@@ -3,8 +3,8 @@ C:\Users\Michał\Documents\Visual Studio 2017\Projects\SZI\SZI\bin\Debug\SZI.exe
 C:\Users\Michał\Documents\Visual Studio 2017\Projects\SZI\SZI\bin\Debug\SZI.pdb
 C:\Users\Michał\Documents\Visual Studio 2017\Projects\SZI\SZI\obj\Debug\SZI.MainWindow.resources
 C:\Users\Michał\Documents\Visual Studio 2017\Projects\SZI\SZI\obj\Debug\SZI.Properties.Resources.resources
-C:\Users\Michał\Documents\Visual Studio 2017\Projects\SZI\SZI\obj\Debug\SZI.TileProperties.resources
 C:\Users\Michał\Documents\Visual Studio 2017\Projects\SZI\SZI\obj\Debug\SZI.csproj.GenerateResource.Cache
 C:\Users\Michał\Documents\Visual Studio 2017\Projects\SZI\SZI\obj\Debug\SZI.exe
 C:\Users\Michał\Documents\Visual Studio 2017\Projects\SZI\SZI\obj\Debug\SZI.pdb
 C:\Users\Michał\Documents\Visual Studio 2017\Projects\SZI\SZI\obj\Debug\SZI.csprojResolveAssemblyReference.cache
+C:\Users\Michał\Documents\Visual Studio 2017\Projects\SZI\SZI\obj\Debug\SZI.TilePropertiesWindow.resources

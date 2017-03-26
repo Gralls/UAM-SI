@@ -13,16 +13,19 @@ using System.Windows.Forms;
 
 namespace SZI
 {
-    public partial class TileProperties : Form
+    public partial class TilePropertiesWindow : Form
     {
         public static String spritesLocation;
         private Button senderGridCell;
         private String currentImagePath = null;
-        private bool playerSetOnThisTile = false;
-        public TileProperties(object sender)
+        private bool setPlayerSetOnThisTile = false;
+        public TilePropertiesWindow(object sender)
         {
             InitializeComponent();
             senderGridCell = (Button)sender;
+            Coordinates position = TileToPositionMapper.getPosition((Button)sender);
+            XPosValue.Text = position.GetX().ToString();
+            YPosValue.Text = position.GetY().ToString();
             spritesLocation = Path.Combine(Environment.CurrentDirectory, "..\\..\\res\\sprites");
             PopulateListBox(ImageListBox, spritesLocation, "*.jpg");
         }
@@ -50,12 +53,18 @@ namespace SZI
         private void OKButton_Click(object sender, EventArgs e)
         {
             if (currentImagePath != null)
-            {
+            { 
                 senderGridCell.BackgroundImage = Image.FromFile(currentImagePath);
                 senderGridCell.BackgroundImageLayout = ImageLayout.Stretch;
             }
-            if (playerSetOnThisTile)
+            if (setPlayerSetOnThisTile)
             {
+                Coordinates actualPlayerPosition = MainLogic.Instance.GetActualPlayerPosition();
+                if (actualPlayerPosition != null)
+                {
+                    PositionToTileMapper.getTile(actualPlayerPosition).Image = null;
+                }
+                MainLogic.Instance.SetActualPlayerPosition(TileToPositionMapper.getPosition(this.senderGridCell));
                 senderGridCell.Image = Image.FromFile(spritesLocation + "\\machine.png");
                 senderGridCell.ImageAlign = ContentAlignment.MiddleCenter;
             }
@@ -90,7 +99,17 @@ namespace SZI
 
         private void PlayerSetterButton_Click(object sender, EventArgs e)
         {
-            playerSetOnThisTile = true;
+            setPlayerSetOnThisTile = true;
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

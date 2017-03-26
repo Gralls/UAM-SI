@@ -1,6 +1,6 @@
 ﻿namespace SZI
 {
-    partial class TileProperties
+    partial class TilePropertiesWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -29,12 +29,14 @@
         private void InitializeComponent()
         {
             this.ImageListBox = new System.Windows.Forms.ListBox();
-            this.Type = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.PictureBox = new System.Windows.Forms.PictureBox();
             this.CancelButton = new System.Windows.Forms.Button();
             this.OKButton = new System.Windows.Forms.Button();
             this.PlayerSetterButton = new System.Windows.Forms.Button();
+            this.XPosLabel = new System.Windows.Forms.Label();
+            this.YPosLabel = new System.Windows.Forms.Label();
+            this.XPosValue = new System.Windows.Forms.Label();
+            this.YPosValue = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,26 +48,6 @@
             this.ImageListBox.Size = new System.Drawing.Size(301, 303);
             this.ImageListBox.TabIndex = 0;
             this.ImageListBox.SelectedIndexChanged += new System.EventHandler(this.ImageListBoxSelectedIndexChanged);
-            // 
-            // Type
-            // 
-            this.Type.AutoSize = true;
-            this.Type.Location = new System.Drawing.Point(340, 226);
-            this.Type.Name = "Type";
-            this.Type.Size = new System.Drawing.Size(31, 13);
-            this.Type.TabIndex = 2;
-            this.Type.Text = "Type";
-            this.Type.Click += new System.EventHandler(this.Type_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(340, 260);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(49, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Filename";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // PictureBox
             // 
@@ -103,23 +85,63 @@
             this.PlayerSetterButton.Name = "PlayerSetterButton";
             this.PlayerSetterButton.Size = new System.Drawing.Size(164, 23);
             this.PlayerSetterButton.TabIndex = 7;
-            this.PlayerSetterButton.Text = "Place Machine here";
+            this.PlayerSetterButton.Text = "Place Player here";
             this.PlayerSetterButton.UseVisualStyleBackColor = true;
             this.PlayerSetterButton.Click += new System.EventHandler(this.PlayerSetterButton_Click);
             // 
-            // TileProperties
+            // XPosLabel
+            // 
+            this.XPosLabel.AutoSize = true;
+            this.XPosLabel.Location = new System.Drawing.Point(343, 202);
+            this.XPosLabel.Name = "XPosLabel";
+            this.XPosLabel.Size = new System.Drawing.Size(17, 13);
+            this.XPosLabel.TabIndex = 8;
+            this.XPosLabel.Text = "X:";
+            this.XPosLabel.Click += new System.EventHandler(this.label1_Click_1);
+            // 
+            // YPosLabel
+            // 
+            this.YPosLabel.AutoSize = true;
+            this.YPosLabel.Location = new System.Drawing.Point(343, 226);
+            this.YPosLabel.Name = "YPosLabel";
+            this.YPosLabel.Size = new System.Drawing.Size(17, 13);
+            this.YPosLabel.TabIndex = 9;
+            this.YPosLabel.Text = "Y:";
+            // 
+            // XPosValue
+            // 
+            this.XPosValue.AutoSize = true;
+            this.XPosValue.Location = new System.Drawing.Point(382, 202);
+            this.XPosValue.Name = "XPosValue";
+            this.XPosValue.Size = new System.Drawing.Size(35, 13);
+            this.XPosValue.TabIndex = 10;
+            this.XPosValue.Text = "label3";
+            // 
+            // YPosValue
+            // 
+            this.YPosValue.AutoSize = true;
+            this.YPosValue.Location = new System.Drawing.Point(382, 226);
+            this.YPosValue.Name = "YPosValue";
+            this.YPosValue.Size = new System.Drawing.Size(35, 13);
+            this.YPosValue.TabIndex = 11;
+            this.YPosValue.Text = "label4";
+            this.YPosValue.Click += new System.EventHandler(this.label4_Click);
+            // 
+            // TilePropertiesWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(531, 335);
+            this.Controls.Add(this.YPosValue);
+            this.Controls.Add(this.XPosValue);
+            this.Controls.Add(this.YPosLabel);
+            this.Controls.Add(this.XPosLabel);
             this.Controls.Add(this.PlayerSetterButton);
             this.Controls.Add(this.OKButton);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.PictureBox);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.Type);
             this.Controls.Add(this.ImageListBox);
-            this.Name = "TileProperties";
+            this.Name = "TilePropertiesWindow";
             this.Text = "TileProperties";
             this.Load += new System.EventHandler(this.TileProperties_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
@@ -131,11 +153,13 @@
         #endregion
 
         private System.Windows.Forms.ListBox ImageListBox;
-        private System.Windows.Forms.Label Type;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox PictureBox;
         private System.Windows.Forms.Button CancelButton;
         private System.Windows.Forms.Button OKButton;
         private System.Windows.Forms.Button PlayerSetterButton;
+        private System.Windows.Forms.Label XPosLabel;
+        private System.Windows.Forms.Label YPosLabel;
+        private System.Windows.Forms.Label XPosValue;
+        private System.Windows.Forms.Label YPosValue;
     }
 }

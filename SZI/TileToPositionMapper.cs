@@ -7,13 +7,13 @@ using System.Windows.Forms;
 
 namespace SZI
 {
-    static class TileToPositionMapper
+    public static class TileToPositionMapper
     {
         public static Coordinates getPosition(Button tile)
         {
             String name = tile.Name;
-            int x = int.Parse(name.Substring(-1));
-            int y = int.Parse(name.Substring(-2));
+            int x = int.Parse(name.Substring(name.Length - 2, 1));
+            int y = int.Parse(name.Substring(name.Length - 1, 1));
             Coordinates coords = new Coordinates(x, y);
             return coords;
         }
