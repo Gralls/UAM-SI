@@ -16,20 +16,10 @@ namespace SZI
         public MainWindow()
         {
             InitializeComponent();
+            InitializeGrids();
         }
 
-
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button13_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
@@ -49,6 +39,7 @@ namespace SZI
         public List<Tile> PopulateTileArray()
         {
             List<Tile> tileList = new List<Tile>();
+            //TODO: przejście na tablice Button[,] grids
             foreach (Control c in this.Controls)
             {
                 if (c is Button && Regex.IsMatch(c.Name, "^grid.+"))
