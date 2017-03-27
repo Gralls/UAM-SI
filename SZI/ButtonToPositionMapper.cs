@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace SZI
 {
-    public static class TileToPositionMapper
+    public static class ButtonToPositionMapper
     {
         public static Coordinates getPosition(Button tile)
         {

@@ -11,6 +11,7 @@ namespace SZI
     {
         private static MainLogic instance;
         Coordinates actualPlayerPosition = null;
+        private List<Tile> tileList;
         public static MainLogic Instance
         {
             get
@@ -18,6 +19,7 @@ namespace SZI
                 if (instance == null)
                 {
                     instance = new MainLogic();
+
                 }
                 return instance;
             }
@@ -31,6 +33,16 @@ namespace SZI
         public Coordinates GetActualPlayerPosition()
         {
             return this.actualPlayerPosition;
+        }
+
+        private void PopulateTileGrid()
+        {
+           
+        }
+
+        private void GetAllControl(MainLogic mainLogic, List<Control> list)
+        {
+            throw new NotImplementedException();
         }
     }
 }

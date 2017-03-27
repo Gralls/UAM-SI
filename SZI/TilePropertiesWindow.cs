@@ -16,14 +16,14 @@ namespace SZI
     public partial class TilePropertiesWindow : Form
     {
         public static String spritesLocation;
-        private Button senderGridCell;
+        private Button senderButton;
         private String currentImagePath = null;
         private bool setPlayerSetOnThisTile = false;
         public TilePropertiesWindow(object sender)
         {
             InitializeComponent();
-            senderGridCell = (Button)sender;
-            Coordinates position = TileToPositionMapper.getPosition((Button)sender);
+            senderButton = (Button)sender;
+            Coordinates position = ButtonToPositionMapper.getPosition((Button)sender);
             XPosValue.Text = position.GetX().ToString();
             YPosValue.Text = position.GetY().ToString();
             spritesLocation = Path.Combine(Environment.CurrentDirectory, "..\\..\\res\\sprites");
@@ -54,8 +54,9 @@ namespace SZI
         {
             if (currentImagePath != null)
             { 
-                senderGridCell.BackgroundImage = Image.FromFile(currentImagePath);
-                senderGridCell.BackgroundImageLayout = ImageLayout.Stretch;
+
+                senderButton.BackgroundImage = Image.FromFile(currentImagePath);
+                senderButton.BackgroundImageLayout = ImageLayout.Stretch;
             }
             if (setPlayerSetOnThisTile)
             {
@@ -64,9 +65,9 @@ namespace SZI
                 {
                     PositionToTileMapper.GetTile(actualPlayerPosition).Image = null;
                 }
-                MainLogic.Instance.SetActualPlayerPosition(TileToPositionMapper.getPosition(this.senderGridCell));
-                senderGridCell.Image = Image.FromFile(spritesLocation + "\\machine.png");
-                senderGridCell.ImageAlign = ContentAlignment.MiddleCenter;
+                MainLogic.Instance.SetActualPlayerPosition(ButtonToPositionMapper.getPosition(this.senderButton));
+                senderButton.Image = Image.FromFile(spritesLocation + "\\machine.png");
+                senderButton.ImageAlign = ContentAlignment.MiddleCenter;
             }
             this.Close();
         }

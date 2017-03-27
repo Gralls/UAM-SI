@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -16,6 +17,8 @@ namespace SZI
         {
             InitializeComponent();
         }
+
+
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -40,9 +43,25 @@ namespace SZI
         private void MainWindow_Load(object sender, EventArgs e)
         {
 
+           
         }
 
+        public List<Tile> PopulateTileArray()
+        {
+            List<Tile> tileList = new List<Tile>();
+            foreach (Control c in this.Controls)
+            {
+                if (c is Button && Regex.IsMatch(c.Name, "^grid.+"))
+                {
 
+                    Coordinates coords = ButtonToPositionMapper.getPosition((Button)c);
+                    //TileImage image. = c.BackgroundImage
+
+                    //tileList.Add(c);
+                }
+            }
+            return tileList;
+        }
 
         private void gridClick(object sender, EventArgs e)
         {

@@ -56,13 +56,15 @@
     <Compile Include="PositionToTileMapper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tile.cs" />
+    <Compile Include="TileImage.cs" />
     <Compile Include="TilePropertiesWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TilePropertiesWindow.Designer.cs">
       <DependentUpon>TilePropertiesWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="TileToPositionMapper.cs" />
+    <Compile Include="ButtonToPositionMapper.cs" />
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
