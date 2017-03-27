@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SZI
 {
-    class TileImage
+    public class TileImage
     {
 
         private String location;
@@ -16,7 +16,7 @@ namespace SZI
         private String property2;
         private String property3;
 
-        public string Location { get => location; set => location = value; }
-        public Image Image { get => image; set => image = value; }
+        public string Location { get; set; }
+        public Image Image { get; set; }
     }
 }

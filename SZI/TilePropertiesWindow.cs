@@ -24,8 +24,8 @@ namespace SZI
             InitializeComponent();
             senderButton = (Button)sender;
             Coordinates position = ButtonToPositionMapper.getPosition((Button)sender);
-            XPosValue.Text = position.GetX().ToString();
-            YPosValue.Text = position.GetY().ToString();
+            XPosValue.Text = position.x.ToString();
+            YPosValue.Text = position.y.ToString();
             spritesLocation = Path.Combine(Environment.CurrentDirectory, "..\\..\\res\\sprites");
             PopulateListBox(ImageListBox, spritesLocation, "*.jpg");
         }

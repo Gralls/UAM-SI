@@ -10,8 +10,8 @@ namespace SZI
     //This will be class for having informations about every tile.
     public class Tile
     {
-        private Coordinates coords;
-        private TileImage tileBackground;
-        private Button correspondingButton;
+        public Coordinates coords { get; set; }
+        public TileImage tileBackground { get; set; }
+        public Button correspondingButton { get; set; }
     }
 }

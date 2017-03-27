@@ -40,7 +40,7 @@ namespace SZI
            
         }
 
-        private void GetAllControl(MainLogic mainLogic, List<Control> list)
+        private void GetAllControls(MainLogic mainLogic, List<Control> list)
         {
             throw new NotImplementedException();
         }

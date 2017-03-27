@@ -11,7 +11,7 @@ namespace SZI
     {
         public static Button GetTile(Coordinates coords)
         {
-            string buttonName = "grid" + coords.GetX().ToString() + coords.GetY().ToString();
+            string buttonName = "grid" + coords.x.ToString() + coords.y.ToString();
             Form mainForm = Application.OpenForms[0];
             return mainForm.Controls.Find(buttonName, true).FirstOrDefault() as Button;
         }

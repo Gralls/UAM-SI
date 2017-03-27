@@ -8,30 +8,12 @@ namespace SZI
 {
     public class Coordinates
     {
-        private int x;
-        private int y;
+        public int x { get; set; }
+        public int y { get; set; }
         public Coordinates(int x, int y)
         {
             this.x = x;
             this.y = y;
         }
-        public int GetX()
-        {
-            return this.x;
-        }
-        public void SetX(int x)
-        {
-            this.x = x;
-        }
-
-        public int GetY()
-        {
-            return this.y;
-        }
-        public void SetY(int y)
-        {
-            this.y = y;
-        }
-
     }
 }
