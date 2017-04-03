@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Astar\WeightedGraph.cs" />
     <Compile Include="Coordinates.cs" />
     <Compile Include="MainLogic.cs" />
     <Compile Include="MainWindow.cs">
@@ -53,9 +54,11 @@
     <Compile Include="MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Plant.cs" />
     <Compile Include="PositionToTileMapper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TerrainTypes.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="TileImage.cs" />
     <Compile Include="TilePropertiesWindow.cs">

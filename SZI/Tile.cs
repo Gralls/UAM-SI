@@ -13,5 +13,6 @@ namespace SZI
         public Coordinates coords { get; set; }
         public TileImage tileBackground { get; set; }
         public Button correspondingButton { get; set; }
+        
     }
 }

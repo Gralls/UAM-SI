@@ -54,11 +54,20 @@ namespace SZI
             return tileList;
         }
 
-        private void gridClick(object sender, EventArgs e)
+        private void gridClick(object sender, MouseEventArgs e)
         {
             Button button = (Button)sender;
-            TilePropertiesWindow tileProperties = new TilePropertiesWindow(button);
-            tileProperties.Show();
+            if (e.Button == MouseButtons.Right)
+            {
+                TilePropertiesWindow tileProperties = new TilePropertiesWindow(button);
+                tileProperties.Show();
+            }
+
+            if (e.Button == MouseButtons.Left)
+            {
+                //todo: implementacja
+            }
+
         }
 
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)

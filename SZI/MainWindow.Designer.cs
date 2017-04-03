@@ -66,11 +66,11 @@ namespace SZI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(781, 451);
             this.Controls.Add(this.menuStrip1);
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.DoubleBuffered = true;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -114,7 +114,7 @@ namespace SZI
                     grid.Size = new System.Drawing.Size(sizeOfGrid, sizeOfGrid);
                     grid.TabIndex = 2;
                     grid.UseVisualStyleBackColor = true;
-                    grid.Click += new System.EventHandler(this.gridClick);
+                    grid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gridClick);
                     this.Controls.Add(grid);
                     grids[x, y] = grid;
                 }
