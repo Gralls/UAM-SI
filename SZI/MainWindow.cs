@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SZI.AstarNamespace;
 
 namespace SZI
 {
@@ -45,7 +46,7 @@ namespace SZI
                 if (c is Button && Regex.IsMatch(c.Name, "^grid.+"))
                 {
 
-                    Coordinates coords = ButtonToPositionMapper.getPosition((Button)c);
+                    Location coords = ButtonToPositionMapper.getPosition((Button)c);
                     //TileImage image. = c.BackgroundImage
 
                     //tileList.Add(c);
@@ -65,7 +66,9 @@ namespace SZI
 
             if (e.Button == MouseButtons.Left)
             {
-                //todo: implementacja
+                Astar astar = new Astar();
+                Location playerPos = MainLogic.Instance.GetActualPlayerPosition();
+
             }
 
         }

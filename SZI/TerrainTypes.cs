@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace SZI
 {
-    class TerrainFactory
+    public class TerrainFactory
     {
-        public enum TerrainTypes {
+        public enum TerrainTypesEnum {
             dryPlain, normalPlain, wetPlain, //pola
             road //inne
         };
@@ -25,15 +25,15 @@ namespace SZI
             return inst;
         }
 
-        public AbstractTerrainType CreateTerrainType(TerrainTypes type)
+        public AbstractTerrainType CreateTerrainType(TerrainTypesEnum type)
         {
             AbstractTerrainType terrainType;
             switch (type)
             {
-                case TerrainTypes.dryPlain: terrainType = CreateDrainPlainTile(); break;
-                case TerrainTypes.normalPlain: terrainType = CreateNormalPlainTile(); break;
-                case TerrainTypes.wetPlain: terrainType = CreateWetPlainTile(); break;
-                case TerrainTypes.road: terrainType = CreateRoadTile(); break;
+                case TerrainTypesEnum.dryPlain: terrainType = CreateDrainPlainTile(); break;
+                case TerrainTypesEnum.normalPlain: terrainType = CreateNormalPlainTile(); break;
+                case TerrainTypesEnum.wetPlain: terrainType = CreateWetPlainTile(); break;
+                case TerrainTypesEnum.road: terrainType = CreateRoadTile(); break;
                 default: terrainType = CreateNormalPlainTile(); break;
             }
 
@@ -42,17 +42,17 @@ namespace SZI
 
         public AbstractTerrainType CreateNormalPlainTile()
         {
-            return new Plain("pole", TerrainTypes.normalPlain);
+            return new Plain("pole", TerrainTypesEnum.normalPlain);
         }
 
         public AbstractTerrainType CreateWetPlainTile()
         {
-            return new Plain("zalane pole", TerrainTypes.wetPlain);
+            return new Plain("zalane pole", TerrainTypesEnum.wetPlain);
         }
 
         public AbstractTerrainType CreateDrainPlainTile()
         {
-            return new Plain("suche pole", TerrainTypes.dryPlain);
+            return new Plain("suche pole", TerrainTypesEnum.dryPlain);
         }
         public AbstractTerrainType CreateRoadTile()
         {
@@ -60,13 +60,21 @@ namespace SZI
         }
     }
 
-    class AbstractTerrainType
+    public interface ITerrainType
+    {
+        int moveCost { get; set; }
+        bool passable { get; set; }
+        string name { get; set; }
+        TerrainFactory.TerrainTypesEnum type { get; set; }
+    }
+
+    public class AbstractTerrainType : ITerrainType
     {
         public int moveCost { get; set; }
         public bool passable { get; set; }
         public string name { get; set; }
-        public TerrainFactory.TerrainTypes type { get; set; } 
-        public AbstractTerrainType(int moveCost, bool passable, string name, TerrainFactory.TerrainTypes type)
+        public TerrainFactory.TerrainTypesEnum type { get; set; } 
+        protected AbstractTerrainType(int moveCost, bool passable, string name, TerrainFactory.TerrainTypesEnum type)
         {
             this.moveCost = moveCost;
             this.passable = passable;
@@ -79,14 +87,14 @@ namespace SZI
 
     class Plain : AbstractTerrainType
     {
-        public Plain(string name, TerrainFactory.TerrainTypes type) : base(2, true, name, type)
+        public Plain(string name, TerrainFactory.TerrainTypesEnum type) : base(2, true, name, type)
         {
         }
     }
 
     class Road : AbstractTerrainType
     {
-        public Road() : base(1, true, "droga", TerrainFactory.TerrainTypes.road)
+        public Road() : base(1, true, "droga", TerrainFactory.TerrainTypesEnum.road)
         {
         }
     }

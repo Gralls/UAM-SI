@@ -9,7 +9,7 @@ namespace SZI
 {
     public static class PositionToTileMapper
     {
-        public static Button GetTile(Coordinates coords)
+        public static Button GetTile(Location coords)
         {
             MainWindow mainForm = Application.OpenForms["MainWindow"] as MainWindow;
             return mainForm.grids[coords.x, coords.y];

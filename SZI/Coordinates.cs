@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace SZI
 {
-    public class Coordinates
+    public class Location
     {
         public int x { get; set; }
         public int y { get; set; }
-        public Coordinates(int x, int y)
+        public Location(int x, int y)
         {
             this.x = x;
             this.y = y;

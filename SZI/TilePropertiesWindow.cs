@@ -23,7 +23,7 @@ namespace SZI
         {
             InitializeComponent();
             senderButton = (Button)sender;
-            Coordinates position = ButtonToPositionMapper.getPosition((Button)sender);
+            Location position = ButtonToPositionMapper.getPosition((Button)sender);
             XPosValue.Text = position.x.ToString();
             YPosValue.Text = position.y.ToString();
             spritesLocation = Path.Combine(Environment.CurrentDirectory, "..\\..\\res\\sprites");
@@ -60,7 +60,7 @@ namespace SZI
             }
             if (setPlayerSetOnThisTile)
             {
-                Coordinates actualPlayerPosition = MainLogic.Instance.GetActualPlayerPosition();
+                Location actualPlayerPosition = MainLogic.Instance.GetActualPlayerPosition();
                 if (actualPlayerPosition != null)
                 {
                     PositionToTileMapper.GetTile(actualPlayerPosition).Image = null;

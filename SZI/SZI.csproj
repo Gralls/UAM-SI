@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Priority Queue, Version=4.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OptimizedPriorityQueue.4.0.4\lib\net45\Priority Queue.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -83,6 +87,7 @@
     <EmbeddedResource Include="TilePropertiesWindow.resx">
       <DependentUpon>TilePropertiesWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

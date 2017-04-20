@@ -10,7 +10,7 @@ namespace SZI
     class MainLogic
     {
         private static MainLogic instance;
-        Coordinates actualPlayerPosition = null;
+        Location actualPlayerPosition = null;
         private List<Tile> tileList;
         public static MainLogic Instance
         {
@@ -25,12 +25,12 @@ namespace SZI
             }
         }
 
-        public void SetActualPlayerPosition(Coordinates coords)
+        public void SetActualPlayerPosition(Location coords)
         {
             this.actualPlayerPosition = coords;
         }
 
-        public Coordinates GetActualPlayerPosition()
+        public Location GetActualPlayerPosition()
         {
             return this.actualPlayerPosition;
         }

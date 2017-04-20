@@ -9,12 +9,12 @@ namespace SZI
 {
     public static class ButtonToPositionMapper
     {
-        public static Coordinates getPosition(Button tile)
+        public static Location getPosition(Button tile)
         {
             String name = tile.Name;
             int x = int.Parse(name.Substring(name.Length - 2, 1));
             int y = int.Parse(name.Substring(name.Length - 1, 1));
-            Coordinates coords = new Coordinates(x, y);
+            Location coords = new Location(x, y);
             return coords;
         }
     }
