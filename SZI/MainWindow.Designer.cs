@@ -100,12 +100,14 @@ namespace SZI
         private void InitializeGrids()
         {
             grids = new Button[sizeInX, sizeInY];
+            Tile[,] tiles = TileGenerator.GetInstance().CreateTiles(new RandomTileGeneratorStrategy(), sizeInX, sizeInY);
             for (int y = 0; y < sizeInY; y++)
             {
                 for (int x = 0; x < sizeInX; x++)
                 {
-                    Button grid = new Button();
-                    //grid.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("grid" + x + y + ".BackgroundImage")));
+                    ButtonWithTile grid = new ButtonWithTile();
+                    grid.tile = tiles[x, y];
+                    grid.BackgroundImage = grid.tile.tileBackground;
                     grid.BackgroundImageLayout = ImageLayout.Stretch;
                     grid.Cursor = Cursors.Default;
                     grid.FlatStyle = FlatStyle.Flat;
@@ -119,6 +121,7 @@ namespace SZI
                     grids[x, y] = grid;
                 }
             }
+            TileContainer.GetInstance().SetTiles(tiles);
         }
     }
 }

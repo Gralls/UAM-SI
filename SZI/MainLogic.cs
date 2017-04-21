@@ -11,7 +11,6 @@ namespace SZI
     {
         private static MainLogic instance;
         Location actualPlayerPosition = null;
-        private List<Tile> tileList;
         public static MainLogic Instance
         {
             get
@@ -19,7 +18,6 @@ namespace SZI
                 if (instance == null)
                 {
                     instance = new MainLogic();
-
                 }
                 return instance;
             }

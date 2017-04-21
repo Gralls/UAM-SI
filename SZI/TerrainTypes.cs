@@ -87,14 +87,14 @@ namespace SZI
 
     class Plain : AbstractTerrainType
     {
-        public Plain(string name, TerrainFactory.TerrainTypesEnum type) : base(2, true, name, type)
+        public Plain(string name, TerrainFactory.TerrainTypesEnum type) : base(20, true, name, type)
         {
         }
     }
 
     class Road : AbstractTerrainType
     {
-        public Road() : base(1, true, "droga", TerrainFactory.TerrainTypesEnum.road)
+        public Road() : base(10, true, "droga", TerrainFactory.TerrainTypesEnum.road)
         {
         }
     }

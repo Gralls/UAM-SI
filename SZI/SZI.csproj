@@ -49,7 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Astar\WeightedGraph.cs" />
+    <Compile Include="Astar\Astar.cs" />
+    <Compile Include="ButtonWithTile.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Coordinates.cs" />
     <Compile Include="MainLogic.cs" />
     <Compile Include="MainWindow.cs">
@@ -63,8 +66,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TerrainTypes.cs" />
-    <Compile Include="Tile.cs" />
-    <Compile Include="TileImage.cs" />
+    <Compile Include="Tile\Tile.cs" />
+    <Compile Include="Tile\TileGenerator.cs" />
+    <Compile Include="Tile\TileImageLoader.cs" />
     <Compile Include="TilePropertiesWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,7 +103,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

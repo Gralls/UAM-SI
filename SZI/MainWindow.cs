@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SZI.AstarNamespace;
@@ -55,6 +56,13 @@ namespace SZI
             return tileList;
         }
 
+        private Location ConvertPositionToLocation(System.Drawing.Point position)
+        {
+            int x = (position.X - locationStartX) / (sizeOfGrid + spaceBeetwenGrids);
+            int y = (position.Y - locationStartY) / (sizeOfGrid + spaceBeetwenGrids);
+            return new Location(x, y);
+        }
+
         private void gridClick(object sender, MouseEventArgs e)
         {
             Button button = (Button)sender;
@@ -68,9 +76,40 @@ namespace SZI
             {
                 Astar astar = new Astar();
                 Location playerPos = MainLogic.Instance.GetActualPlayerPosition();
+                if (playerPos == null)
+                    return;
+                Location target = ConvertPositionToLocation(button.Location);
+                List<Tile> locationsVisited = astar.GetPath(
+                    TileContainer.GetInstance().FindTile(playerPos), 
+                    TileContainer.GetInstance().FindTile(target));
 
+                grids[playerPos.x, playerPos.y].Image = null;
+                Thread[] animationThreads = new Thread[locationsVisited.Count];
+                for (int i = 0; i < locationsVisited.Count -1; i++)
+                {
+                    animationThreads[i] = new Thread(() => AddToAnimate(locationsVisited[i], locationsVisited.Last()));
+                    animationThreads[i].Start();
+                }
+                /*foreach (Thread thread in animationThreads)
+                {
+                    thread.Join();
+                }*/
             }
+        }
 
+        private void AddToAnimate(Tile location, Tile last)
+        {
+            int sleepTime = 500;
+            System.Threading.Thread.Sleep(sleepTime);
+            string spritesLocation = System.IO.Path.Combine(Environment.CurrentDirectory, "..\\..\\res\\sprites");
+            int x = location.location.x;
+            int y = location.location.y;
+            MainLogic.Instance.SetActualPlayerPosition(location.location);
+            grids[x, y].Image = Image.FromFile(spritesLocation + "\\machine.png");
+            grids[x, y].ImageAlign = ContentAlignment.MiddleCenter;
+            System.Threading.Thread.Sleep(sleepTime);
+            if (location != last)
+                grids[x, y].Image = null;
         }
 
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)

@@ -61,7 +61,7 @@ namespace SZI.AstarNamespace
                         costSoFar[next] = newCost;
                         cameFrom[next] = current;
                         int priority = newCost + Heuristic(goal, next);
-                        friontier.Enqueue(next, newCost + priority);
+                        friontier.Enqueue(next, priority);
                     }
 
                 }
