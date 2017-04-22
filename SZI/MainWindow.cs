@@ -84,33 +84,51 @@ namespace SZI
                     TileContainer.GetInstance().FindTile(target));
 
                 grids[playerPos.x, playerPos.y].Image = null;
-                Thread[] animationThreads = new Thread[locationsVisited.Count];
-                for (int i = 0; i < locationsVisited.Count -1; i++)
+                Tile previousTile = null;
+                foreach (Tile location in locationsVisited)
                 {
-                    animationThreads[i] = new Thread(() => AddToAnimate(locationsVisited[i], locationsVisited.Last()));
-                    animationThreads[i].Start();
+                    int sleepTime = 250;
+                    System.Threading.Thread.Sleep(sleepTime);
+                    if (previousTile != null)
+                    {
+                        grids[previousTile.location.x, previousTile.location.y].Image = null;
+                        grids[previousTile.location.x, previousTile.location.y].Refresh();
+                    }
+                    string spritesLocation = System.IO.Path.Combine(Environment.CurrentDirectory, "..\\..\\res\\sprites");
+                    int x = location.location.x;
+                    int y = location.location.y;
+                    MainLogic.Instance.SetActualPlayerPosition(location.location);
+                    grids[x, y].Image = Image.FromFile(spritesLocation + "\\machine.png");
+                    //grids[x, y].Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                    grids[x, y].ImageAlign = ContentAlignment.MiddleCenter;
+                    System.Threading.Thread.Sleep(sleepTime);
+                    //zapisywanie pola z którego traktor wyjeżdża dla wyczyszczenia go
+                    if (location != locationsVisited.Last())
+                        previousTile = location;
+                    else
+                        previousTile = null;
+                    grids[x, y].Refresh();
                 }
-                /*foreach (Thread thread in animationThreads)
-                {
-                    thread.Join();
-                }*/
+                //*/
             }
         }
 
-        private void AddToAnimate(Tile location, Tile last)
+        /*private void AddToAnimate(Tile location, bool last, int iteration)
         {
             int sleepTime = 500;
-            System.Threading.Thread.Sleep(sleepTime);
+            System.Threading.Thread.Sleep(sleepTime*iteration);
             string spritesLocation = System.IO.Path.Combine(Environment.CurrentDirectory, "..\\..\\res\\sprites");
             int x = location.location.x;
             int y = location.location.y;
             MainLogic.Instance.SetActualPlayerPosition(location.location);
             grids[x, y].Image = Image.FromFile(spritesLocation + "\\machine.png");
+            grids[x, y].Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
             grids[x, y].ImageAlign = ContentAlignment.MiddleCenter;
+            grids[x, y].Refresh();
             System.Threading.Thread.Sleep(sleepTime);
-            if (location != last)
+            if (!last)
                 grids[x, y].Image = null;
-        }
+        }*/
 
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
         {
