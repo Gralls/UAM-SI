@@ -16,13 +16,13 @@ namespace SZI
     public partial class TilePropertiesWindow : Form
     {
         public static String spritesLocation;
-        private Button senderButton;
+        private ButtonWithTile senderButton;
         private String currentImagePath = null;
         private bool setPlayerSetOnThisTile = false;
         public TilePropertiesWindow(object sender)
         {
             InitializeComponent();
-            senderButton = (Button)sender;
+            senderButton = (ButtonWithTile)sender;
             Location position = ButtonToPositionMapper.getPosition((Button)sender);
             XPosValue.Text = position.x.ToString();
             YPosValue.Text = position.y.ToString();
@@ -35,16 +35,6 @@ namespace SZI
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void CancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -53,21 +43,12 @@ namespace SZI
         private void OKButton_Click(object sender, EventArgs e)
         {
             if (currentImagePath != null)
-            { 
-
-                senderButton.BackgroundImage = Image.FromFile(currentImagePath);
-                senderButton.BackgroundImageLayout = ImageLayout.Stretch;
+            {
+                senderButton.tile.ChangeTerrain(currentImagePath);
             }
             if (setPlayerSetOnThisTile)
             {
-                Location actualPlayerPosition = MainLogic.Instance.GetActualPlayerPosition();
-                if (actualPlayerPosition != null)
-                {
-                    PositionToTileMapper.GetTile(actualPlayerPosition).Image = null;
-                }
-                MainLogic.Instance.SetActualPlayerPosition(ButtonToPositionMapper.getPosition(this.senderButton));
-                senderButton.Image = Image.FromFile(spritesLocation + "\\machine.png");
-                senderButton.ImageAlign = ContentAlignment.MiddleCenter;
+                MainLogic.Instance.SetActualPlayerTile(senderButton.tile);
             }
             this.Close();
         }

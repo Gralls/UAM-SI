@@ -12,7 +12,7 @@ namespace SZI
 {
     class TileImageLoader
     {
-        public Image GetRandomImageCorrespondingToTerrainType(TerrainTypesEnum type)
+        public string GetRandomImageNameCorrespondingToTerrainType(TerrainTypesEnum type)
         {
             string regexStr;
             switch (type)
@@ -23,10 +23,10 @@ namespace SZI
                 case TerrainTypesEnum.wetPlain: regexStr = "wet_soil*"; break;
                 default: regexStr = "soil*"; break;
             }
-            return GetRandomImageMatchingRegex(regexStr);
+            return GetRandomImageNameMatchingRegex(regexStr);
         }
 
-        private Image GetRandomImageMatchingRegex(string regexStr)
+        private string GetRandomImageNameMatchingRegex(string regexStr)
         {
             Regex reg = new Regex(regexStr);
             var files = Directory.GetFiles(spritesLocation)
@@ -35,7 +35,18 @@ namespace SZI
 
             Random rand = new Random();
             int number = rand.Next(0, files.Count);
-            return Image.FromFile(files[number]);
+            return files[number];
+        }
+
+        public Image GetImageByName(string name)
+        {
+            return Image.FromFile(name);
+        }
+
+        public Image GetPlayerImage()
+        {
+            string spritesLocation = System.IO.Path.Combine(Environment.CurrentDirectory, "..\\..\\res\\sprites");
+            return Image.FromFile(spritesLocation + "\\machine.png");
         }
         
         private string spritesLocation;

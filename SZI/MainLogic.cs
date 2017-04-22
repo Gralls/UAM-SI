@@ -10,7 +10,7 @@ namespace SZI
     class MainLogic
     {
         private static MainLogic instance;
-        Location actualPlayerPosition = null;
+        Tile actualPlayerPosition = null;
         public static MainLogic Instance
         {
             get
@@ -23,12 +23,20 @@ namespace SZI
             }
         }
 
-        public void SetActualPlayerPosition(Location coords)
+        public void SetActualPlayerTile(Tile tile)
         {
-            this.actualPlayerPosition = coords;
+            if (actualPlayerPosition != null)
+            {
+                actualPlayerPosition.havePlayer = false;
+                actualPlayerPosition.rotationOfPlayer = Tile.RotationEnum.none;
+                actualPlayerPosition.Notify();
+            }
+            this.actualPlayerPosition = tile;
+            actualPlayerPosition.havePlayer = true;
+            actualPlayerPosition.Notify();
         }
 
-        public Location GetActualPlayerPosition()
+        public Tile GetActualPlayerTile()
         {
             return this.actualPlayerPosition;
         }

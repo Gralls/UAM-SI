@@ -61,6 +61,7 @@
     <Compile Include="MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Observer.cs" />
     <Compile Include="Plant.cs" />
     <Compile Include="PositionToTileMapper.cs" />
     <Compile Include="Program.cs" />

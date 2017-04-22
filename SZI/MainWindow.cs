@@ -63,6 +63,12 @@ namespace SZI
             return new Location(x, y);
         }
 
+        private void GridMouseOver(object sender, System.EventArgs e)
+        {
+            ButtonWithTile button = (ButtonWithTile)sender;
+            lblTerrainTypeText.Text = button.tile.terrainType.name;
+        }
+
         private void gridClick(object sender, MouseEventArgs e)
         {
             Button button = (Button)sender;
@@ -75,60 +81,25 @@ namespace SZI
             if (e.Button == MouseButtons.Left)
             {
                 Astar astar = new Astar();
-                Location playerPos = MainLogic.Instance.GetActualPlayerPosition();
+                Tile playerPos = MainLogic.Instance.GetActualPlayerTile();
                 if (playerPos == null)
                     return;
                 Location target = ConvertPositionToLocation(button.Location);
                 List<Tile> locationsVisited = astar.GetPath(
-                    TileContainer.GetInstance().FindTile(playerPos), 
+                    playerPos, 
                     TileContainer.GetInstance().FindTile(target));
-
-                grids[playerPos.x, playerPos.y].Image = null;
-                Tile previousTile = null;
+                ;
                 foreach (Tile location in locationsVisited)
                 {
                     int sleepTime = 250;
                     System.Threading.Thread.Sleep(sleepTime);
-                    if (previousTile != null)
-                    {
-                        grids[previousTile.location.x, previousTile.location.y].Image = null;
-                        grids[previousTile.location.x, previousTile.location.y].Refresh();
-                    }
-                    string spritesLocation = System.IO.Path.Combine(Environment.CurrentDirectory, "..\\..\\res\\sprites");
-                    int x = location.location.x;
-                    int y = location.location.y;
-                    MainLogic.Instance.SetActualPlayerPosition(location.location);
-                    grids[x, y].Image = Image.FromFile(spritesLocation + "\\machine.png");
-                    //grids[x, y].Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
-                    grids[x, y].ImageAlign = ContentAlignment.MiddleCenter;
-                    System.Threading.Thread.Sleep(sleepTime);
-                    //zapisywanie pola z którego traktor wyjeżdża dla wyczyszczenia go
-                    if (location != locationsVisited.Last())
-                        previousTile = location;
-                    else
-                        previousTile = null;
-                    grids[x, y].Refresh();
+                    Tile actualTile = TileContainer.GetInstance().FindTile(location.location);
+                    actualTile = location;
+                    MainLogic.Instance.SetActualPlayerTile(actualTile);
+                    actualTile.Notify();
                 }
-                //*/
             }
         }
-
-        /*private void AddToAnimate(Tile location, bool last, int iteration)
-        {
-            int sleepTime = 500;
-            System.Threading.Thread.Sleep(sleepTime*iteration);
-            string spritesLocation = System.IO.Path.Combine(Environment.CurrentDirectory, "..\\..\\res\\sprites");
-            int x = location.location.x;
-            int y = location.location.y;
-            MainLogic.Instance.SetActualPlayerPosition(location.location);
-            grids[x, y].Image = Image.FromFile(spritesLocation + "\\machine.png");
-            grids[x, y].Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
-            grids[x, y].ImageAlign = ContentAlignment.MiddleCenter;
-            grids[x, y].Refresh();
-            System.Threading.Thread.Sleep(sleepTime);
-            if (!last)
-                grids[x, y].Image = null;
-        }*/
 
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -138,6 +109,11 @@ namespace SZI
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnRerollMap_Click(object sender, EventArgs e)
+        {
+            InitializeGrids();
         }
     }
 }

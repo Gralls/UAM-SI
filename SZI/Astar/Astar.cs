@@ -15,7 +15,7 @@ namespace SZI.AstarNamespace
         }
         private Dictionary<Tile, Tile> cameFrom;
         private Dictionary<Tile, int> costSoFar;
-        private SimplePriorityQueue<Tile> friontier;
+        private SimplePriorityQueue<Tile> frontier;
 
         public List<Tile> GetPath(Tile begining, Tile goal)
         {
@@ -36,18 +36,21 @@ namespace SZI.AstarNamespace
 
         private void CreatePath(Tile begining, Tile goal)
         {
+            //działamy na sklonowanych wartościach, żeby nie nadpisywać aktualnie używanych tile
+            //begining = begining.Clone();
+            //goal = goal.Clone();
             //przygotowywanie warunków początkowych na wypadek kilkukrotnego użycia tej samej instancji
-            friontier = new SimplePriorityQueue<Tile>();
-            friontier.Enqueue(begining, 0);
+            frontier = new SimplePriorityQueue<Tile>();
+            frontier.Enqueue(begining, 0);
             
             cameFrom = new Dictionary<Tile, Tile>();
             costSoFar = new Dictionary<Tile, int>();
             cameFrom.Add(begining, null);
             costSoFar.Add(begining, 0);
 
-            while (friontier.Count != 0)
+            while (frontier.Count != 0)
             {
-                Tile current = friontier.Dequeue();
+                Tile current = frontier.Dequeue();
 
                 if (current == goal)
                     break;
@@ -55,13 +58,14 @@ namespace SZI.AstarNamespace
                 IEnumerable<Tile> neigbours = TileContainer.GetInstance().GetNeigbours(current);
                 foreach (Tile next in neigbours) //sprawdzamy sasiadow aktualnie wzietego elementu kolejki
                 {
+                    //Tile next = nextNotCloned.Clone(); //wymagane żeby nie wylecieć z IEnumerable
                     int newCost = costSoFar[current] + next.terrainType.moveCost;
                     if (costSoFar.ContainsKey(next) != true || newCost < costSoFar[next])
                     {
                         costSoFar[next] = newCost;
                         cameFrom[next] = current;
                         int priority = newCost + Heuristic(goal, next);
-                        friontier.Enqueue(next, priority);
+                        frontier.Enqueue(next, priority);
                     }
 
                 }

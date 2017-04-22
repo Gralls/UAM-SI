@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace SZI
@@ -23,6 +24,25 @@ namespace SZI
             if (inst == null)
                 inst = new TerrainFactory();
             return inst;
+        }
+
+        public AbstractTerrainType GetTerrainTypeFromTerrainName(string name)
+        {
+            Regex reg = new Regex("road*");
+            if (reg.IsMatch(name))
+                return CreateTerrainType(TerrainTypesEnum.road);
+            reg = new Regex("dry_soil*");
+            if (reg.IsMatch(name))
+                return CreateTerrainType(TerrainTypesEnum.dryPlain);
+            reg = new Regex("wet_soil*");
+            if (reg.IsMatch(name))
+                return CreateTerrainType(TerrainTypesEnum.wetPlain);
+            reg = new Regex("soil*");
+            if (reg.IsMatch(name))
+                return CreateTerrainType(TerrainTypesEnum.normalPlain);
+            //default
+            return CreateTerrainType(TerrainTypesEnum.normalPlain);
+
         }
 
         public AbstractTerrainType CreateTerrainType(TerrainTypesEnum type)

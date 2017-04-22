@@ -16,6 +16,7 @@ namespace SZI
 
     class RandomTileGeneratorStrategy : ITileGeneratorStrategy
     {
+        Random rnd = new Random();
         public RandomTileGeneratorStrategy()
         {
 
@@ -30,14 +31,13 @@ namespace SZI
                     tiles[x, y] = new Tile();
                     tiles[x, y].location = new Location(x, y);
                     tiles[x, y].terrainType = GetRandomTerrainType();
-                    tiles[x, y].tileBackground = imageLoader.GetRandomImageCorrespondingToTerrainType(tiles[x, y].terrainType.type);
+                    tiles[x, y].tileBackgroundName = imageLoader.GetRandomImageNameCorrespondingToTerrainType(tiles[x, y].terrainType.type);
                 }
             return tiles;
         }
 
         public ITerrainType GetRandomTerrainType()
         {
-            Random rnd = new Random();
             ITerrainType terrain;
             TerrainFactory terrainFactory = TerrainFactory.GetInst();
             int randomNumber = rnd.Next(0, 3);

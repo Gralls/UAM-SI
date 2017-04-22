@@ -69,13 +69,32 @@ namespace SZI
     }
 
     //This will be class for having informations about every tile.
-    public class Tile
+    public class Tile : Subject
     {
+        public Tile() : base()
+        {
+        }
         public Location location { get; set; }
-        public Image tileBackground { get; set; }
+        public string tileBackgroundName { get; set; }
+        public bool havePlayer { get; set; }
         public ITerrainType terrainType { get; set; }
-        public Button correspondingButton { get; set; }
-        
+        public enum RotationEnum { north, east, south, west, none }
+        public RotationEnum rotationOfPlayer { get; set; }
+        public void ChangeTerrain (string terrainName)
+        {
+            tileBackgroundName = terrainName;
+            terrainType = TerrainFactory.GetInst().GetTerrainTypeFromTerrainName(terrainName);
+            Notify();
+        }
+        public Tile Clone()
+        {
+            Tile tile = new Tile();
+            tile.location = this.location;
+            tile.tileBackgroundName = this.tileBackgroundName;
+            tile.havePlayer = this.havePlayer;
+            tile.terrainType = this.terrainType;
+            tile.rotationOfPlayer = this.rotationOfPlayer;
+            return tile;
+        }
     }
-
 }

@@ -33,6 +33,9 @@ namespace SZI
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.btnRerollMap = new System.Windows.Forms.Button();
+            this.lblTerrainTypeInfo = new System.Windows.Forms.Label();
+            this.lblTerrainTypeText = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,12 +65,43 @@ namespace SZI
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // btnRerollMap
+            // 
+            this.btnRerollMap.Location = new System.Drawing.Point(694, 27);
+            this.btnRerollMap.Name = "btnRerollMap";
+            this.btnRerollMap.Size = new System.Drawing.Size(75, 23);
+            this.btnRerollMap.TabIndex = 2;
+            this.btnRerollMap.Text = "Reroll";
+            this.btnRerollMap.UseVisualStyleBackColor = true;
+            this.btnRerollMap.Click += new System.EventHandler(this.btnRerollMap_Click);
+            // 
+            // lblTerrainTypeInfo
+            // 
+            this.lblTerrainTypeInfo.AutoSize = true;
+            this.lblTerrainTypeInfo.Location = new System.Drawing.Point(633, 81);
+            this.lblTerrainTypeInfo.Name = "lblTerrainTypeInfo";
+            this.lblTerrainTypeInfo.Size = new System.Drawing.Size(61, 13);
+            this.lblTerrainTypeInfo.TabIndex = 5;
+            this.lblTerrainTypeInfo.Text = "Typ terenu:";
+            // 
+            // lblTerrainTypeText
+            // 
+            this.lblTerrainTypeText.AutoSize = true;
+            this.lblTerrainTypeText.Location = new System.Drawing.Point(701, 81);
+            this.lblTerrainTypeText.Name = "lblTerrainTypeText";
+            this.lblTerrainTypeText.Size = new System.Drawing.Size(73, 13);
+            this.lblTerrainTypeText.TabIndex = 7;
+            this.lblTerrainTypeText.Text = "";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(781, 451);
+            this.Controls.Add(this.lblTerrainTypeText);
+            this.Controls.Add(this.lblTerrainTypeInfo);
+            this.Controls.Add(this.btnRerollMap);
             this.Controls.Add(this.menuStrip1);
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.DoubleBuffered = true;
@@ -99,16 +133,14 @@ namespace SZI
 
         private void InitializeGrids()
         {
-            grids = new Button[sizeInX, sizeInY];
+            grids = new ButtonWithTile[sizeInX, sizeInY];
             Tile[,] tiles = TileGenerator.GetInstance().CreateTiles(new RandomTileGeneratorStrategy(), sizeInX, sizeInY);
             for (int y = 0; y < sizeInY; y++)
             {
                 for (int x = 0; x < sizeInX; x++)
                 {
-                    ButtonWithTile grid = new ButtonWithTile();
-                    grid.tile = tiles[x, y];
-                    grid.BackgroundImage = grid.tile.tileBackground;
-                    grid.BackgroundImageLayout = ImageLayout.Stretch;
+                    ButtonWithTile grid = new ButtonWithTile(tiles[x, y]);
+                    tiles[x, y].Notify();
                     grid.Cursor = Cursors.Default;
                     grid.FlatStyle = FlatStyle.Flat;
                     grid.Location = new System.Drawing.Point(locationStartX + x * sizeOfGrid + x * spaceBeetwenGrids, locationStartY + y * sizeOfGrid + y * spaceBeetwenGrids);
@@ -117,12 +149,17 @@ namespace SZI
                     grid.TabIndex = 2;
                     grid.UseVisualStyleBackColor = true;
                     grid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.gridClick);
+                    grid.MouseEnter += new System.EventHandler(this.GridMouseOver);
                     this.Controls.Add(grid);
                     grids[x, y] = grid;
                 }
             }
             TileContainer.GetInstance().SetTiles(tiles);
         }
+
+        private Button btnRerollMap;
+        private Label lblTerrainTypeInfo;
+        private Label lblTerrainTypeText;
     }
 }
 
