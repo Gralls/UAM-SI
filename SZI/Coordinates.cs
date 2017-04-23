@@ -15,5 +15,15 @@ namespace SZI
             this.x = x;
             this.y = y;
         }
+
+        public static Location operator +(Location l1, Location l2)
+        {
+            return new Location(l1.x + l2.x, l1.y + l2.y);
+        }
+
+        public static Location operator -(Location l1, Location l2)
+        {
+            return new Location(l1.x - l2.x, l1.y - l2.y);
+        }
     }
 }

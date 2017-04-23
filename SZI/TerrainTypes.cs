@@ -107,7 +107,7 @@ namespace SZI
 
     class Plain : AbstractTerrainType
     {
-        public Plain(string name, TerrainFactory.TerrainTypesEnum type) : base(20, true, name, type)
+        public Plain(string name, TerrainFactory.TerrainTypesEnum type) : base(40, true, name, type)
         {
         }
     }

@@ -98,6 +98,7 @@ namespace SZI
                     MainLogic.Instance.SetActualPlayerTile(actualTile);
                     actualTile.Notify();
                 }
+                TileContainer.GetInstance().ClearTilesRotationExceptPlayerLocation();
             }
         }
 

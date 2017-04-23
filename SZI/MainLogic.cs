@@ -31,6 +31,8 @@ namespace SZI
                 actualPlayerPosition.rotationOfPlayer = Tile.RotationEnum.none;
                 actualPlayerPosition.Notify();
             }
+            else
+                tile.rotationOfPlayer = Tile.RotationEnum.west;
             this.actualPlayerPosition = tile;
             actualPlayerPosition.havePlayer = true;
             actualPlayerPosition.Notify();

@@ -31,7 +31,16 @@ namespace SZI
             {
                 this.Image = imageLoader.GetPlayerImage();
                 this.ImageAlign = ContentAlignment.MiddleCenter;
+
+                if (tile.rotationOfPlayer == Tile.RotationEnum.north)
+                    this.Image.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                if (tile.rotationOfPlayer == Tile.RotationEnum.south)
+                    this.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                if (tile.rotationOfPlayer == Tile.RotationEnum.east)
+                    this.Image.RotateFlip(RotateFlipType.Rotate180FlipY);
             }
+            else
+                this.Image = null;
             this.Refresh();
         }
     }

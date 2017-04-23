@@ -33,6 +33,26 @@ namespace SZI
             return allTiles;
         }
 
+        public void ClearTilesRotationExceptPlayerLocation()
+        {
+            foreach (Tile t in allTiles)
+            {
+                if (t != MainLogic.Instance.GetActualPlayerTile())
+                {
+                    t.rotationOfPlayer = Tile.RotationEnum.none;
+                }
+            }
+        }
+
+        internal void ClearTilesRotationExceptLocations(List<Tile> path)
+        {
+            foreach (Tile t in allTiles)
+            {
+                if (!path.Contains(t))
+                    t.rotationOfPlayer = Tile.RotationEnum.none;
+            }
+        }
+
         public IEnumerable<Tile> GetNeigbours(Tile tile)
         {
 
