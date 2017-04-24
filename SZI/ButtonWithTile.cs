@@ -24,7 +24,6 @@ namespace SZI
         public void UpdateAfterSubjectChanged()
         {
             TileImageLoader imageLoader = TileImageLoader.GetInstance();
-            var oldRotation = tile.rotationOfPlayer;
             this.BackgroundImage = imageLoader.GetImageByName(tile.tileBackgroundName);
             this.BackgroundImageLayout = ImageLayout.Stretch;
             if (tile.havePlayer)

@@ -92,7 +92,8 @@ namespace SZI.AstarNamespace
                 {
                     //Tile next = nextNotCloned.Clone(); //wymagane żeby nie wylecieć z IEnumerable
                     Tile.RotationEnum rotationTo = CalcRotation(current.location, next.location);
-
+                    if (next.terrainType.passable == false)
+                        continue;
                     int newCost = costSoFar[current] + next.terrainType.moveCost + CalcRotationCost(current, rotationTo);
                     if (costSoFar.ContainsKey(next) != true || newCost < costSoFar[next])
                     {
@@ -102,7 +103,6 @@ namespace SZI.AstarNamespace
                         int priority = newCost + Heuristic(goal, next);
                         frontier.Enqueue(next, priority);
                     }
-
                 }
             }
         }

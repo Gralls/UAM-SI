@@ -73,6 +73,7 @@ namespace SZI
             this.btnRerollMap.TabIndex = 2;
             this.btnRerollMap.Text = "Reroll";
             this.btnRerollMap.UseVisualStyleBackColor = true;
+            this.btnRerollMap.Visible = false;
             this.btnRerollMap.Click += new System.EventHandler(this.btnRerollMap_Click);
             // 
             // lblTerrainTypeInfo
@@ -89,9 +90,8 @@ namespace SZI
             this.lblTerrainTypeText.AutoSize = true;
             this.lblTerrainTypeText.Location = new System.Drawing.Point(701, 81);
             this.lblTerrainTypeText.Name = "lblTerrainTypeText";
-            this.lblTerrainTypeText.Size = new System.Drawing.Size(73, 13);
+            this.lblTerrainTypeText.Size = new System.Drawing.Size(0, 13);
             this.lblTerrainTypeText.TabIndex = 7;
-            this.lblTerrainTypeText.Text = "";
             // 
             // MainWindow
             // 

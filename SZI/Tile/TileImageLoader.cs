@@ -12,6 +12,8 @@ namespace SZI
 {
     class TileImageLoader
     {
+        Random rand = new Random();
+
         public string GetRandomImageNameCorrespondingToTerrainType(TerrainTypesEnum type)
         {
             string regexStr;
@@ -33,7 +35,6 @@ namespace SZI
                                 .Where(path => reg.IsMatch(path))
                                 .ToList();
 
-            Random rand = new Random();
             int number = rand.Next(0, files.Count);
             return files[number];
         }
