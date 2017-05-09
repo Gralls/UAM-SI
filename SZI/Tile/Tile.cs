@@ -100,6 +100,7 @@ namespace SZI
         public ITerrainType terrainType { get; set; }
         public enum RotationEnum { north, east, south, west, none }
         public RotationEnum rotationOfPlayer { get; set; }
+        public SZI.Genetics.Genome genome { get; set};
         public void ChangeTerrain (string terrainName)
         {
             tileBackgroundName = terrainName;
@@ -114,6 +115,7 @@ namespace SZI
             tile.havePlayer = this.havePlayer;
             tile.terrainType = this.terrainType;
             tile.rotationOfPlayer = this.rotationOfPlayer;
+            tile.genome = this.genome;
             return tile;
         }
     }

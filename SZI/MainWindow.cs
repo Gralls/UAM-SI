@@ -72,6 +72,7 @@ namespace SZI
         private void gridClick(object sender, MouseEventArgs e)
         {
             Button button = (Button)sender;
+            Genetics gen = new Genetics();
             if (e.Button == MouseButtons.Right)
             {
                 TilePropertiesWindow tileProperties = new TilePropertiesWindow(button);
@@ -100,6 +101,7 @@ namespace SZI
                 }
                 TileContainer.GetInstance().ClearTilesRotationExceptPlayerLocation();
             }
+            
         }
 
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
