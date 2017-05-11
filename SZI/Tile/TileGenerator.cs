@@ -30,8 +30,14 @@ namespace SZI
                 {
                     tiles[x, y] = new Tile();
                     tiles[x, y].location = new Location(x, y);
-                    tiles[x, y].terrainType = GetRandomTerrainType();
+                    tiles[x, y].SetTerrainType(GetRandomTerrainType());
                     tiles[x, y].tileBackgroundName = imageLoader.GetRandomImageNameCorrespondingToTerrainType(tiles[x, y].terrainType.type);
+                    int randomNumber = rnd.Next(0, 10);
+                    if (randomNumber%2 == 0)
+                        tiles[x, y].fertilizeStatus = new FertilizeStatus(true);
+                    else
+                        tiles[x, y].fertilizeStatus = new FertilizeStatus(false);
+                    tiles[x, y].plant = new Plant();
                 }
             return tiles;
         }

@@ -21,6 +21,10 @@ namespace SZI
             InitializeGrids();
         }
 
+        public void AddLineToOrdersLog(string line)
+        {
+            rtbOrdersLog.Text = line + "\n" + rtbOrdersLog.Text;
+        }
         
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -38,24 +42,6 @@ namespace SZI
            
         }
 
-        public List<Tile> PopulateTileArray()
-        {
-            List<Tile> tileList = new List<Tile>();
-            //TODO: przejście na tablice Button[,] grids
-            foreach (Control c in this.Controls)
-            {
-                if (c is Button && Regex.IsMatch(c.Name, "^grid.+"))
-                {
-
-                    Location coords = ButtonToPositionMapper.getPosition((Button)c);
-                    //TileImage image. = c.BackgroundImage
-
-                    //tileList.Add(c);
-                }
-            }
-            return tileList;
-        }
-
         private Location ConvertPositionToLocation(System.Drawing.Point position)
         {
             int x = (position.X - locationStartX) / (sizeOfGrid + spaceBeetwenGrids);
@@ -67,6 +53,17 @@ namespace SZI
         {
             ButtonWithTile button = (ButtonWithTile)sender;
             lblTerrainTypeText.Text = button.tile.terrainType.name;
+            if (button.tile.terrainType.type == TerrainFactory.TerrainTypesEnum.road)
+            {
+                lblPlantStatusText.Text = "nie dotyczy";
+                lblFertilizeStatusText.Text = "nie dotyczy";
+
+            }
+            else
+            {
+                lblPlantStatusText.Text = button.tile.plant.StringInfo();
+                lblFertilizeStatusText.Text = button.tile.fertilizeStatus.FertilizeStringInfo();
+            }
         }
 
         private void gridClick(object sender, MouseEventArgs e)
@@ -77,8 +74,27 @@ namespace SZI
                 TilePropertiesWindow tileProperties = new TilePropertiesWindow(button);
                 tileProperties.Show();
             }
-
-            if (e.Button == MouseButtons.Left)
+            else if (e.Button == MouseButtons.Middle)
+            {
+                Location target = ConvertPositionToLocation(button.Location);
+                Tile tile = TileContainer.GetInstance().FindTile(target);
+                if (tile.terrainType.type == TerrainFactory.TerrainTypesEnum.road)
+                    return;
+                ID3.ID3Tree id3 = new ID3.ID3Tree();
+                AbstractOrder order;
+                order = AbstractOrder.CreateOrder(id3.GetDecisionForTile(tile));
+                while (order.orderNumber != -1)
+                {
+                    order.ExecuteOrder(tile);
+                    String orderLog = String.Format("Wykonano rozkaz {0}.", order.logName).ToString();
+                    AddLineToOrdersLog(orderLog);
+                    order = AbstractOrder.CreateOrder(id3.GetDecisionForTile(tile));
+                }
+                AddLineToOrdersLog("Zakończono kolejke rozkazów");
+                GridMouseOver(sender, e);
+                TileContainer.GetInstance().ProceedTurnOnEveryTile();
+            }
+            else if (e.Button == MouseButtons.Left)
             {
                 Astar astar = new Astar();
                 Tile playerPos = MainLogic.Instance.GetActualPlayerTile();

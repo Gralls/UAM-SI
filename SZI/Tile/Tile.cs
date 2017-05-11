@@ -53,6 +53,11 @@ namespace SZI
             }
         }
 
+        public void ProceedTurnOnEveryTile()
+        {
+            foreach (Tile t in allTiles)
+                t.NextTurn();
+        }
         public IEnumerable<Tile> GetNeigbours(Tile tile)
         {
 
@@ -89,7 +94,7 @@ namespace SZI
     }
 
     //This will be class for having informations about every tile.
-    public class Tile : Subject
+    public class Tile : Subject, IObserver
     {
         public Tile() : base()
         {
@@ -97,9 +102,39 @@ namespace SZI
         public Location location { get; set; }
         public string tileBackgroundName { get; set; }
         public bool havePlayer { get; set; }
-        public ITerrainType terrainType { get; set; }
+        public ITerrainType terrainType { get; private set; }
         public enum RotationEnum { north, east, south, west, none }
         public RotationEnum rotationOfPlayer { get; set; }
+        public Plant plant { get; set; }
+        public FertilizeStatus fertilizeStatus { get; set; }
+        public void SetTerrainType(ITerrainType value)
+        {
+            if (terrainType != null)
+                terrainType.Detach(this);
+            terrainType = value;
+            if (value != null)
+                value.Attach(this);
+        }
+        public string GetID3WaterStatusStr()
+        {
+            string waterStatusStr;
+            switch (terrainType.type)
+            {
+                case TerrainFactory.TerrainTypesEnum.dryPlain: waterStatusStr = TileParameters.SoilLowHumidity; break;
+                case TerrainFactory.TerrainTypesEnum.normalPlain: waterStatusStr = TileParameters.SoilMediumHumidity; break;
+                case TerrainFactory.TerrainTypesEnum.wetPlain: waterStatusStr = TileParameters.SoilHighHumidity; break;
+                default: waterStatusStr = TileParameters.SoilMediumHumidity; break;
+            }
+            return waterStatusStr;
+        }
+
+        public void NextTurn()
+        {
+            plant.CropStatusChange(this);
+            terrainType.NextTurn(this);
+            fertilizeStatus.NextTurn();
+        }
+
         public void ChangeTerrain (string terrainName)
         {
             tileBackgroundName = terrainName;
@@ -115,6 +150,12 @@ namespace SZI
             tile.terrainType = this.terrainType;
             tile.rotationOfPlayer = this.rotationOfPlayer;
             return tile;
+        }
+
+        public void UpdateAfterSubjectChanged()
+        {
+            tileBackgroundName = TileImageLoader.GetInstance().GetRandomImageNameCorrespondingToTerrainType(terrainType.type);
+            Notify();
         }
     }
 }

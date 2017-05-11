@@ -42,15 +42,5 @@ namespace SZI
         {
             return this.actualPlayerPosition;
         }
-
-        private void PopulateTileGrid()
-        {
-           
-        }
-
-        private void GetAllControls(MainLogic mainLogic, List<Control> list)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

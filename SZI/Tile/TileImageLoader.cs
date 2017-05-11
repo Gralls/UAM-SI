@@ -20,10 +20,10 @@ namespace SZI
             switch (type)
             {
                 case TerrainTypesEnum.dryPlain: regexStr = "dry_soil*"; break;
-                case TerrainTypesEnum.normalPlain: regexStr = "soil*"; break;
+                case TerrainTypesEnum.normalPlain: regexStr = "normal_soil*"; break;
                 case TerrainTypesEnum.road: regexStr = "road*"; break;
                 case TerrainTypesEnum.wetPlain: regexStr = "wet_soil*"; break;
-                default: regexStr = "soil*"; break;
+                default: regexStr = "normal_soil*"; break;
             }
             return GetRandomImageNameMatchingRegex(regexStr);
         }
