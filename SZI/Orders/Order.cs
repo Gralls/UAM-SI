@@ -66,7 +66,7 @@ namespace SZI
 
     public class WaterOrder : AbstractOrder
     {
-        public WaterOrder() : base(0, OrdersResource.WaterOrder, 20, "podlewania") { }
+        public WaterOrder() : base(0, OrdersResource.WaterOrder, 20, "podlewania pola") { }
 
         public override void ExecuteOrder(Tile tile)
         {

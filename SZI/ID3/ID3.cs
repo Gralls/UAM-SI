@@ -20,6 +20,7 @@ namespace SZI.ID3
         private DecisionTree tree;
         int[][] inputs;
         int[] outputs;
+        private static ID3Tree instance;
         public DataTable CreateTrainingDataTable()
         {
             DataTable data = new DataTable("Zachowanie traktora");
@@ -66,7 +67,7 @@ namespace SZI.ID3
             id3learning = new ID3Learning(tree);
         }
 
-        public ID3Tree()
+        private ID3Tree()
         {
             initializeID3();
             DataTable table = CreateTrainingDataTable();
@@ -76,6 +77,13 @@ namespace SZI.ID3
             outputs = symbols.ToIntArray("Action").GetColumn(0);
 
             id3learning.Run(inputs, outputs);
+        }
+
+        public static ID3Tree GetInst()
+        {
+            if (instance == null)
+                instance = new ID3Tree();
+            return instance;
         }
 
         public string GetDecisionForTile(Tile tile)

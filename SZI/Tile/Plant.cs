@@ -97,7 +97,7 @@ namespace SZI
         }
 
         public bool healthy { get; set; }
-        enum GrowthStatusEnum { noPlant, growingPlant, maturePlant, sickPlant }
+        public enum GrowthStatusEnum { noPlant, growingPlant, maturePlant, sickPlant }
         GrowthStatusEnum growthStatus;
         int growthLevel;
 

@@ -21,11 +21,19 @@ namespace SZI
             InitializeGrids();
         }
 
-        public void AddLineToOrdersLog(string line)
+        public void AddLinesToOrdersLog(string orders)
         {
-            rtbOrdersLog.Text = line + "\n" + rtbOrdersLog.Text;
+            rtbOrdersLog.Text = orders + "\n" + rtbOrdersLog.Text;
         }
         
+        public void AddLinesToOrdersLog(List<string> orders)
+        {
+            if (orders == null)
+                return;
+            foreach (string str in orders)
+                AddLinesToOrdersLog(str);
+        }
+
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
@@ -78,43 +86,18 @@ namespace SZI
             {
                 Location target = ConvertPositionToLocation(button.Location);
                 Tile tile = TileContainer.GetInstance().FindTile(target);
-                if (tile.terrainType.type == TerrainFactory.TerrainTypesEnum.road)
-                    return;
-                ID3.ID3Tree id3 = new ID3.ID3Tree();
-                AbstractOrder order;
-                order = AbstractOrder.CreateOrder(id3.GetDecisionForTile(tile));
-                while (order.orderNumber != -1)
-                {
-                    order.ExecuteOrder(tile);
-                    String orderLog = String.Format("Wykonano rozkaz {0}.", order.logName).ToString();
-                    AddLineToOrdersLog(orderLog);
-                    order = AbstractOrder.CreateOrder(id3.GetDecisionForTile(tile));
-                }
-                AddLineToOrdersLog("Zakończono kolejke rozkazów");
+                MainLogic.Instance.MovePlayer(TileContainer.GetInstance().FindTile(target));
+                List<string> ordersLog = MainLogic.Instance.StartWorkAtTile(tile);
+                AddLinesToOrdersLog(ordersLog);
                 GridMouseOver(sender, e);
-                TileContainer.GetInstance().ProceedTurnOnEveryTile();
             }
             else if (e.Button == MouseButtons.Left)
             {
-                Astar astar = new Astar();
                 Tile playerPos = MainLogic.Instance.GetActualPlayerTile();
                 if (playerPos == null)
                     return;
                 Location target = ConvertPositionToLocation(button.Location);
-                List<Tile> locationsVisited = astar.GetPath(
-                    playerPos, 
-                    TileContainer.GetInstance().FindTile(target));
-                ;
-                foreach (Tile location in locationsVisited)
-                {
-                    int sleepTime = 250;
-                    System.Threading.Thread.Sleep(sleepTime);
-                    Tile actualTile = TileContainer.GetInstance().FindTile(location.location);
-                    actualTile = location;
-                    MainLogic.Instance.SetActualPlayerTile(actualTile);
-                    actualTile.Notify();
-                }
-                TileContainer.GetInstance().ClearTilesRotationExceptPlayerLocation();
+                MainLogic.Instance.MovePlayer(TileContainer.GetInstance().FindTile(target));
             }
         }
 

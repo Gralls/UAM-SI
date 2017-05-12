@@ -117,8 +117,8 @@ namespace SZI
 
     class Plain : AbstractTerrainType
     {
-        int isNormalAbove = 4;
-        int isWetAbove = 8;
+        int isNormal = 4;
+        int isWet = 8;
         public Plain(string name, TerrainFactory.TerrainTypesEnum type, int waterStatus) : base(40, true, name, type)
         {
             this.waterLevel = waterStatus;
@@ -126,10 +126,21 @@ namespace SZI
 
         int waterLevel;
 
+        void changeType(TerrainFactory.TerrainTypesEnum newType)
+        {
+            type = newType;
+            if (type == TerrainFactory.TerrainTypesEnum.normalPlain)
+                name = "pole";
+            else if (type == TerrainFactory.TerrainTypesEnum.dryPlain)
+                name = "suche pole";
+            else if (type == TerrainFactory.TerrainTypesEnum.wetPlain)
+                name = "zalane pole";
+        }
+
         public void WaterPlain()
         {
-            waterLevel = 7;
-            type = TerrainFactory.TerrainTypesEnum.normalPlain;
+            waterLevel = isWet -1;
+            changeType(TerrainFactory.TerrainTypesEnum.normalPlain);
             Notify();
         }
 
@@ -138,21 +149,21 @@ namespace SZI
             waterLevel--;
             if (waterLevel < 0)
                 waterLevel = 0;
-            if (waterLevel < isNormalAbove && type != TerrainFactory.TerrainTypesEnum.dryPlain)
+            if (waterLevel < isNormal && type != TerrainFactory.TerrainTypesEnum.dryPlain)
             {
-                type = TerrainFactory.TerrainTypesEnum.dryPlain;
+                changeType(TerrainFactory.TerrainTypesEnum.dryPlain);
                 Notify();
             }
-            else if (waterLevel >= isNormalAbove && waterLevel < isWetAbove && type != TerrainFactory.TerrainTypesEnum.normalPlain)
+            else if (waterLevel >= isNormal && waterLevel < isWet && type != TerrainFactory.TerrainTypesEnum.normalPlain)
             {
-                type = TerrainFactory.TerrainTypesEnum.normalPlain;
+                changeType(TerrainFactory.TerrainTypesEnum.normalPlain);
                 Notify();
             }
             else if (waterLevel > 10 && type != TerrainFactory.TerrainTypesEnum.dryPlain)
                 waterLevel = 10;
-            else if (waterLevel >= isWetAbove && type != TerrainFactory.TerrainTypesEnum.wetPlain)
+            else if (waterLevel >= isWet && type != TerrainFactory.TerrainTypesEnum.wetPlain)
             {
-                type = TerrainFactory.TerrainTypesEnum.wetPlain;
+                changeType(TerrainFactory.TerrainTypesEnum.wetPlain);
                 Notify();
             }
 

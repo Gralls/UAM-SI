@@ -17,7 +17,7 @@ namespace SZI.AstarNamespace
         private Dictionary<Tile, int> costSoFar;
         private SimplePriorityQueue<Tile> frontier;
 
-        public List<Tile> GetPath(Tile begining, Tile goal)
+        public List<Tile> GetPath(Tile begining, Tile goal, out int moveCost)
         {
             CreatePath(begining, goal); //tworzenie sciezki
 
@@ -25,10 +25,12 @@ namespace SZI.AstarNamespace
             Tile current = goal;
             List<Tile> path = new List<Tile>();
             path.Add(goal);
+            moveCost = 0;
             while (current != begining)
             {
                 //zapisywanie potencjalnie nadpisanej rotacji
                 current.rotationOfPlayer = CalcRotation(cameFrom[current].location, current.location);
+                moveCost += current.terrainType.moveCost + CalcRotationCost(current, cameFrom[current].rotationOfPlayer);
                 current = cameFrom[current];
                 path.Add(current);
             }
