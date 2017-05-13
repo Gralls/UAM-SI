@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SZI.AstarNamespace;
+using SZI.Genetics;
 
 namespace SZI
 {
@@ -14,6 +15,7 @@ namespace SZI
         Tile actualPlayerPosition = null;
         int turnTimer;
         int turnLength = 500;
+        int populationGrade = 0;
         public static MainLogic Instance
         {
             get
@@ -102,5 +104,29 @@ namespace SZI
                 ordersLog.Add("Zakończono kolejkę rozkazów.");
             return ordersLog;
         }
+
+        public List<string> GenerateBestPopulation()
+        {
+            List<string> results=new List<string>();
+            Population pop = new Population(TileContainer.GetInstance().GetTiles());
+            int generationCount = 0;
+            populationGrade = pop.Grade();
+            Console.WriteLine(pop.Size());
+            while (!(FitnessCalc.getTarget() - 5 < populationGrade && populationGrade < FitnessCalc.getTarget() + 5))
+            {
+                results.Add("Generation: " + generationCount + " Grade: " + populationGrade);
+                generationCount++;
+
+                pop = GeneticAlgorithm.evolvePopulation(pop);
+                populationGrade = pop.Grade();
+            }
+            results.Add("Solution found!");
+            results.Add("Generation: " + generationCount);
+            results.Add("Genes: " + pop.GetFittest());
+            results.Add("Grade: " + pop.Grade());
+            return results;
+        }
+
+      
     }
 }

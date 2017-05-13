@@ -42,6 +42,12 @@ namespace SZI
             this.lblFertilizeStatusText = new System.Windows.Forms.Label();
             this.rtbOrdersLog = new System.Windows.Forms.RichTextBox();
             this.lblOrdersLog = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblGenes = new System.Windows.Forms.Label();
+            this.geneticAlgorithm = new System.Windows.Forms.Button();
+            this.lblPopGrade = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.rtbGeneticLog = new System.Windows.Forms.RichTextBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,7 +73,7 @@ namespace SZI
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(781, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1084, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -99,6 +105,7 @@ namespace SZI
             this.lblTerrainTypeText.Size = new System.Drawing.Size(10, 13);
             this.lblTerrainTypeText.TabIndex = 7;
             this.lblTerrainTypeText.Text = " ";
+            this.lblTerrainTypeText.Click += new System.EventHandler(this.lblTerrainTypeText_Click);
             // 
             // lblPlantStatusInfo
             // 
@@ -154,12 +161,76 @@ namespace SZI
             this.lblOrdersLog.TabIndex = 13;
             this.lblOrdersLog.Text = "Log rozkazów:";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(822, 81);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(38, 13);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Geny: ";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // lblGenes
+            // 
+            this.lblGenes.AutoSize = true;
+            this.lblGenes.Location = new System.Drawing.Point(866, 81);
+            this.lblGenes.Name = "lblGenes";
+            this.lblGenes.Size = new System.Drawing.Size(10, 13);
+            this.lblGenes.TabIndex = 15;
+            this.lblGenes.Text = " ";
+            // 
+            // geneticAlgorithm
+            // 
+            this.geneticAlgorithm.Location = new System.Drawing.Point(825, 128);
+            this.geneticAlgorithm.Name = "geneticAlgorithm";
+            this.geneticAlgorithm.Size = new System.Drawing.Size(147, 23);
+            this.geneticAlgorithm.TabIndex = 16;
+            this.geneticAlgorithm.Text = "Start Genetic Algorithm";
+            this.geneticAlgorithm.UseVisualStyleBackColor = true;
+            this.geneticAlgorithm.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // lblPopGrade
+            // 
+            this.lblPopGrade.AutoSize = true;
+            this.lblPopGrade.Location = new System.Drawing.Point(915, 98);
+            this.lblPopGrade.Name = "lblPopGrade";
+            this.lblPopGrade.Size = new System.Drawing.Size(10, 13);
+            this.lblPopGrade.TabIndex = 18;
+            this.lblPopGrade.Text = " ";
+            this.lblPopGrade.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(822, 98);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(87, 13);
+            this.label3.TabIndex = 17;
+            this.label3.Text = "Ocena populacji:";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
+            // 
+            // rtbGeneticLog
+            // 
+            this.rtbGeneticLog.Location = new System.Drawing.Point(775, 154);
+            this.rtbGeneticLog.Name = "rtbGeneticLog";
+            this.rtbGeneticLog.ReadOnly = true;
+            this.rtbGeneticLog.Size = new System.Drawing.Size(263, 222);
+            this.rtbGeneticLog.TabIndex = 19;
+            this.rtbGeneticLog.Text = "";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(781, 451);
+            this.ClientSize = new System.Drawing.Size(1084, 451);
+            this.Controls.Add(this.rtbGeneticLog);
+            this.Controls.Add(this.lblPopGrade);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.geneticAlgorithm);
+            this.Controls.Add(this.lblGenes);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lblOrdersLog);
             this.Controls.Add(this.rtbOrdersLog);
             this.Controls.Add(this.lblFertilizeStatusText);
@@ -233,6 +304,12 @@ namespace SZI
         private Label lblFertilizeStatusText;
         private RichTextBox rtbOrdersLog;
         private Label lblOrdersLog;
+        private Label label1;
+        private Label lblGenes;
+        private Button geneticAlgorithm;
+        private Label lblPopGrade;
+        private Label label3;
+        private RichTextBox rtbGeneticLog;
     }
 }
 

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SZI.Genetics;
 
 namespace SZI
 {
@@ -98,6 +99,12 @@ namespace SZI
     {
         public Tile() : base()
         {
+            genes = new int[4];
+            for (int i = 0; i < 4; i++)
+            {
+                int gene = RandomStaticProvider.RandomInteger(0, 100);
+                genes[i] = gene;
+            }
         }
         public Location location { get; set; }
         public string tileBackgroundName { get; set; }
@@ -107,6 +114,8 @@ namespace SZI
         public RotationEnum rotationOfPlayer { get; set; }
         public Plant plant { get; set; }
         public FertilizeStatus fertilizeStatus { get; set; }
+        private int[] genes;
+        public int fitness = 0;
         public void SetTerrainType(ITerrainType value)
         {
             if (terrainType != null)
@@ -149,7 +158,6 @@ namespace SZI
             tile.havePlayer = this.havePlayer;
             tile.terrainType = this.terrainType;
             tile.rotationOfPlayer = this.rotationOfPlayer;
-            tile.genome = this.genome;
             return tile;
         }
 
@@ -157,6 +165,42 @@ namespace SZI
         {
             tileBackgroundName = TileImageLoader.GetInstance().GetRandomImageNameCorrespondingToTerrainType(terrainType.type);
             Notify();
+        }
+        public int GetGene(int index)
+        {
+            return genes[index];
+        }
+
+        public string getGenes()
+        {
+            return "[" + genes[0] + "," + genes[1] + "," + genes[2] + "," + genes[3] + "]";
+        }
+        public void SetGene(int index, int value)
+        {
+            genes[index] = value;
+        }
+
+        public int GetFitness()
+        {
+            if (fitness == 0)
+            {
+                fitness = FitnessCalc.GetFitness(this);
+            }
+            return fitness;
+        }
+
+        public int Size()
+        {
+            return genes.Length;
+        }
+        public override string ToString()
+        {
+            string geneString = "";
+            for (int i = 0; i < Size(); i++)
+            {
+                geneString += GetGene(i) + ",";
+            }
+            return geneString;
         }
     }
 }
