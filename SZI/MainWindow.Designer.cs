@@ -36,6 +36,12 @@ namespace SZI
             this.btnRerollMap = new System.Windows.Forms.Button();
             this.lblTerrainTypeInfo = new System.Windows.Forms.Label();
             this.lblTerrainTypeText = new System.Windows.Forms.Label();
+            this.lblPlantStatusInfo = new System.Windows.Forms.Label();
+            this.lblPlantStatusText = new System.Windows.Forms.Label();
+            this.lblFertilizeStatusInfo = new System.Windows.Forms.Label();
+            this.lblFertilizeStatusText = new System.Windows.Forms.Label();
+            this.rtbOrdersLog = new System.Windows.Forms.RichTextBox();
+            this.lblOrdersLog = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -90,8 +96,63 @@ namespace SZI
             this.lblTerrainTypeText.AutoSize = true;
             this.lblTerrainTypeText.Location = new System.Drawing.Point(701, 81);
             this.lblTerrainTypeText.Name = "lblTerrainTypeText";
-            this.lblTerrainTypeText.Size = new System.Drawing.Size(0, 13);
+            this.lblTerrainTypeText.Size = new System.Drawing.Size(10, 13);
             this.lblTerrainTypeText.TabIndex = 7;
+            this.lblTerrainTypeText.Text = " ";
+            // 
+            // lblPlantStatusInfo
+            // 
+            this.lblPlantStatusInfo.AutoSize = true;
+            this.lblPlantStatusInfo.Location = new System.Drawing.Point(636, 98);
+            this.lblPlantStatusInfo.Name = "lblPlantStatusInfo";
+            this.lblPlantStatusInfo.Size = new System.Drawing.Size(44, 13);
+            this.lblPlantStatusInfo.TabIndex = 8;
+            this.lblPlantStatusInfo.Text = "Rośliny:";
+            // 
+            // lblPlantStatusText
+            // 
+            this.lblPlantStatusText.AutoSize = true;
+            this.lblPlantStatusText.Location = new System.Drawing.Point(701, 98);
+            this.lblPlantStatusText.Name = "lblPlantStatusText";
+            this.lblPlantStatusText.Size = new System.Drawing.Size(10, 13);
+            this.lblPlantStatusText.TabIndex = 9;
+            this.lblPlantStatusText.Text = " ";
+            // 
+            // lblFertilizeStatusInfo
+            // 
+            this.lblFertilizeStatusInfo.AutoSize = true;
+            this.lblFertilizeStatusInfo.Location = new System.Drawing.Point(636, 115);
+            this.lblFertilizeStatusInfo.Name = "lblFertilizeStatusInfo";
+            this.lblFertilizeStatusInfo.Size = new System.Drawing.Size(61, 13);
+            this.lblFertilizeStatusInfo.TabIndex = 10;
+            this.lblFertilizeStatusInfo.Text = "Nawożona:";
+            // 
+            // lblFertilizeStatusText
+            // 
+            this.lblFertilizeStatusText.AutoSize = true;
+            this.lblFertilizeStatusText.Location = new System.Drawing.Point(701, 115);
+            this.lblFertilizeStatusText.Name = "lblFertilizeStatusText";
+            this.lblFertilizeStatusText.Size = new System.Drawing.Size(10, 13);
+            this.lblFertilizeStatusText.TabIndex = 11;
+            this.lblFertilizeStatusText.Text = " ";
+            // 
+            // rtbOrdersLog
+            // 
+            this.rtbOrdersLog.Location = new System.Drawing.Point(506, 154);
+            this.rtbOrdersLog.Name = "rtbOrdersLog";
+            this.rtbOrdersLog.ReadOnly = true;
+            this.rtbOrdersLog.Size = new System.Drawing.Size(263, 222);
+            this.rtbOrdersLog.TabIndex = 12;
+            this.rtbOrdersLog.Text = "";
+            // 
+            // lblOrdersLog
+            // 
+            this.lblOrdersLog.AutoSize = true;
+            this.lblOrdersLog.Location = new System.Drawing.Point(503, 138);
+            this.lblOrdersLog.Name = "lblOrdersLog";
+            this.lblOrdersLog.Size = new System.Drawing.Size(76, 13);
+            this.lblOrdersLog.TabIndex = 13;
+            this.lblOrdersLog.Text = "Log rozkazów:";
             // 
             // MainWindow
             // 
@@ -99,6 +160,12 @@ namespace SZI
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(781, 451);
+            this.Controls.Add(this.lblOrdersLog);
+            this.Controls.Add(this.rtbOrdersLog);
+            this.Controls.Add(this.lblFertilizeStatusText);
+            this.Controls.Add(this.lblFertilizeStatusInfo);
+            this.Controls.Add(this.lblPlantStatusText);
+            this.Controls.Add(this.lblPlantStatusInfo);
             this.Controls.Add(this.lblTerrainTypeText);
             this.Controls.Add(this.lblTerrainTypeInfo);
             this.Controls.Add(this.btnRerollMap);
@@ -160,6 +227,12 @@ namespace SZI
         private Button btnRerollMap;
         private Label lblTerrainTypeInfo;
         private Label lblTerrainTypeText;
+        private Label lblPlantStatusInfo;
+        private Label lblPlantStatusText;
+        private Label lblFertilizeStatusInfo;
+        private Label lblFertilizeStatusText;
+        private RichTextBox rtbOrdersLog;
+        private Label lblOrdersLog;
     }
 }
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SZI.AstarNamespace;
 
 namespace SZI
 {
@@ -11,6 +12,8 @@ namespace SZI
     {
         private static MainLogic instance;
         Tile actualPlayerPosition = null;
+        int turnTimer;
+        int turnLength = 500;
         public static MainLogic Instance
         {
             get
@@ -43,14 +46,61 @@ namespace SZI
             return this.actualPlayerPosition;
         }
 
-        private void PopulateTileGrid()
+        void CheckTurn()
         {
-           
+            while (turnTimer > turnLength)
+            {
+                turnTimer -= turnLength;
+                TileContainer.GetInstance().ProceedTurnOnEveryTile();
+            }
         }
 
-        private void GetAllControls(MainLogic mainLogic, List<Control> list)
+        void AddToTurnTimer(int value)
         {
-            throw new NotImplementedException();
+            turnTimer += value;
+            CheckTurn();
+        }
+
+        public void MovePlayer(Tile target)
+        {
+            Astar astar = new Astar();
+            int moveCost = 0;
+            List<Tile> locationsVisited = astar.GetPath(
+                actualPlayerPosition, target, out moveCost);
+            foreach (Tile location in locationsVisited)
+            {
+                int sleepTime = 250;
+                System.Threading.Thread.Sleep(sleepTime);
+                Tile actualTile = TileContainer.GetInstance().FindTile(location.location);
+                actualTile = location;
+                MainLogic.Instance.SetActualPlayerTile(actualTile);
+                actualTile.Notify();
+            }
+            TileContainer.GetInstance().ClearTilesRotationExceptPlayerLocation();
+            AddToTurnTimer(moveCost);
+
+        }
+
+        public List<string> StartWorkAtTile(Tile tile)
+        {
+
+            if (tile.terrainType.type == TerrainFactory.TerrainTypesEnum.road)
+                return null;
+            ID3.ID3Tree id3 = ID3.ID3Tree.GetInst();
+            AbstractOrder order;
+            List<string> ordersLog = new List<string>();
+            order = AbstractOrder.CreateOrder(id3.GetDecisionForTile(tile));
+            while (order.orderNumber != -1)
+            {
+                order.ExecuteOrder(tile);
+                String orderLog = String.Format("Wykonano rozkaz {0}.", order.logName).ToString();
+                ordersLog.Add(orderLog);
+                order = AbstractOrder.CreateOrder(id3.GetDecisionForTile(tile));
+                AddToTurnTimer(order.timeCost);
+            }
+            if (ordersLog.Count > 0)
+                ordersLog.Add("Zakończono kolejkę rozkazów.");
+            return ordersLog;
         }
     }
 }

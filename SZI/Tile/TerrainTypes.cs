@@ -62,17 +62,17 @@ namespace SZI
 
         public AbstractTerrainType CreateNormalPlainTile()
         {
-            return new Plain("pole", TerrainTypesEnum.normalPlain);
+            return new Plain("pole", TerrainTypesEnum.normalPlain, 5);
         }
 
         public AbstractTerrainType CreateWetPlainTile()
         {
-            return new Plain("zalane pole", TerrainTypesEnum.wetPlain);
+            return new Plain("zalane pole", TerrainTypesEnum.wetPlain, 8);
         }
 
         public AbstractTerrainType CreateDrainPlainTile()
         {
-            return new Plain("suche pole", TerrainTypesEnum.dryPlain);
+            return new Plain("suche pole", TerrainTypesEnum.dryPlain, 2);
         }
         public AbstractTerrainType CreateRoadTile()
         {
@@ -82,14 +82,24 @@ namespace SZI
 
     public interface ITerrainType
     {
+
+        void NextTurn(Tile tile);
         int moveCost { get; set; }
         bool passable { get; set; }
         string name { get; set; }
         TerrainFactory.TerrainTypesEnum type { get; set; }
+        void Attach(IObserver observer);
+
+        void Detach(IObserver observer);
+
+        void Notify();
+
     }
 
-    public class AbstractTerrainType : ITerrainType
+    public abstract class AbstractTerrainType : Subject, ITerrainType
     {
+
+        public abstract void NextTurn(Tile tile);
         public int moveCost { get; set; }
         public bool passable { get; set; }
         public string name { get; set; }
@@ -107,8 +117,56 @@ namespace SZI
 
     class Plain : AbstractTerrainType
     {
-        public Plain(string name, TerrainFactory.TerrainTypesEnum type) : base(40, true, name, type)
+        int isNormal = 4;
+        int isWet = 8;
+        public Plain(string name, TerrainFactory.TerrainTypesEnum type, int waterStatus) : base(40, true, name, type)
         {
+            this.waterLevel = waterStatus;
+        }
+
+        int waterLevel;
+
+        void changeType(TerrainFactory.TerrainTypesEnum newType)
+        {
+            type = newType;
+            if (type == TerrainFactory.TerrainTypesEnum.normalPlain)
+                name = "pole";
+            else if (type == TerrainFactory.TerrainTypesEnum.dryPlain)
+                name = "suche pole";
+            else if (type == TerrainFactory.TerrainTypesEnum.wetPlain)
+                name = "zalane pole";
+        }
+
+        public void WaterPlain()
+        {
+            waterLevel = isWet -1;
+            changeType(TerrainFactory.TerrainTypesEnum.normalPlain);
+            Notify();
+        }
+
+        public override void NextTurn(Tile tile)
+        {
+            waterLevel--;
+            if (waterLevel < 0)
+                waterLevel = 0;
+            if (waterLevel < isNormal && type != TerrainFactory.TerrainTypesEnum.dryPlain)
+            {
+                changeType(TerrainFactory.TerrainTypesEnum.dryPlain);
+                Notify();
+            }
+            else if (waterLevel >= isNormal && waterLevel < isWet && type != TerrainFactory.TerrainTypesEnum.normalPlain)
+            {
+                changeType(TerrainFactory.TerrainTypesEnum.normalPlain);
+                Notify();
+            }
+            else if (waterLevel > 10 && type != TerrainFactory.TerrainTypesEnum.dryPlain)
+                waterLevel = 10;
+            else if (waterLevel >= isWet && type != TerrainFactory.TerrainTypesEnum.wetPlain)
+            {
+                changeType(TerrainFactory.TerrainTypesEnum.wetPlain);
+                Notify();
+            }
+
         }
     }
 
@@ -117,6 +175,8 @@ namespace SZI
         public Road() : base(10, true, "droga", TerrainFactory.TerrainTypesEnum.road)
         {
         }
+
+        public override void NextTurn(Tile tile) { }
     }
 
 #endregion
