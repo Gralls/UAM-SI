@@ -95,11 +95,10 @@ namespace SZI
                 return false;
             return true;
         }
-
-        public bool healthy { get; set; }
+        
         public enum GrowthStatusEnum { noPlant, growingPlant, maturePlant, sickPlant }
-        GrowthStatusEnum growthStatus;
-        int growthLevel;
+        protected GrowthStatusEnum growthStatus;
+        protected int growthLevel;
 
         public string GetID3String()
         {

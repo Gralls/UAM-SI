@@ -13,7 +13,7 @@ using SZI.Orders;
 
 namespace SZI.ID3
 {
-    class ID3Tree
+    public class ID3Tree
     {
         private ID3Learning id3learning;
         private Codification codebook;
@@ -89,6 +89,14 @@ namespace SZI.ID3
         public string GetDecisionForTile(Tile tile)
         {
             int[] query = codebook.Translate(tile.GetID3WaterStatusStr(), tile.plant.GetID3String(), tile.fertilizeStatus.GetID3String());
+            int output = tree.Compute(query);
+            string answer = codebook.Translate("Action", output);
+            return answer;
+        }
+
+        public string GetDecision(string waterStatus, string plantStatus, string fertilizerStatus)
+        {
+            int[] query = codebook.Translate(waterStatus, plantStatus, fertilizerStatus);
             int output = tree.Compute(query);
             string answer = codebook.Translate("Action", output);
             return answer;

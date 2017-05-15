@@ -49,7 +49,7 @@ namespace SZI
             int randomNumber = rnd.Next(0, 3);
             switch (randomNumber)
             {
-                case 0: terrain = terrainFactory.CreateDrainPlainTile(); break;
+                case 0: terrain = terrainFactory.CreateDryPlainTile(); break;
                 case 1: terrain = terrainFactory.CreateNormalPlainTile(); break;
                 case 2: terrain = terrainFactory.CreateRoadTile(); break;
                 case 3: terrain = terrainFactory.CreateWetPlainTile(); break;

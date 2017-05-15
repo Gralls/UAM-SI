@@ -50,7 +50,7 @@ namespace SZI
             AbstractTerrainType terrainType;
             switch (type)
             {
-                case TerrainTypesEnum.dryPlain: terrainType = CreateDrainPlainTile(); break;
+                case TerrainTypesEnum.dryPlain: terrainType = CreateDryPlainTile(); break;
                 case TerrainTypesEnum.normalPlain: terrainType = CreateNormalPlainTile(); break;
                 case TerrainTypesEnum.wetPlain: terrainType = CreateWetPlainTile(); break;
                 case TerrainTypesEnum.road: terrainType = CreateRoadTile(); break;
@@ -70,7 +70,7 @@ namespace SZI
             return new Plain("zalane pole", TerrainTypesEnum.wetPlain, 8);
         }
 
-        public AbstractTerrainType CreateDrainPlainTile()
+        public AbstractTerrainType CreateDryPlainTile()
         {
             return new Plain("suche pole", TerrainTypesEnum.dryPlain, 2);
         }
@@ -115,7 +115,7 @@ namespace SZI
 
 #region TERRAIN_TYPES
 
-    class Plain : AbstractTerrainType
+    public class Plain : AbstractTerrainType
     {
         int isNormal = 4;
         int isWet = 8;
