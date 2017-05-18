@@ -13,7 +13,7 @@ namespace SZI.Genetics
         private static double mutationRate = 0.15;
         private static int tournamentSize = 5;
         private static bool elitism = true;
-     
+
         public static Population evolvePopulation(Population pop)
         {
             Population newPopulation = new Population(pop.Size());
@@ -35,13 +35,13 @@ namespace SZI.Genetics
 
             for (int i = elitismOffset; i < pop.Size(); i++)
             {
-                Tile indiv1 = TournamentSelection(pop);
-                Tile indiv2 = TournamentSelection(pop);
-                Tile newIndiv = crossOver(indiv1, indiv2);
+                Individual indiv1 = TournamentSelection(pop);
+                Individual indiv2 = TournamentSelection(pop);
+                Individual newIndiv = crossOver(indiv1, indiv2);
                 newPopulation.SaveIndividual(i, newIndiv);
             }
 
-            for(int i = elitismOffset; i < newPopulation.Size(); i++)
+            for (int i = elitismOffset; i < newPopulation.Size(); i++)
             {
                 mutate(newPopulation.getIndividual(i));
             }
@@ -49,48 +49,55 @@ namespace SZI.Genetics
             return newPopulation;
         }
 
-        private static Tile crossOver(Tile indiv1, Tile indiv2)
+        private static Individual crossOver(Individual indiv1, Individual indiv2)
         {
-            Tile newSol = new Tile();
-           
-            for(int i = 0; i < indiv1.Size(); i++)
-            {
-                if(RandomStaticProvider.RandomDouble() <= uniformRate)
-                {
-                    newSol.SetGene(i, indiv1.GetGene(i));
-                }
-                else
-                {
-                    newSol.SetGene(i, indiv2.GetGene(i));
-                }
-            }
+            Individual newSol = new Individual(6, 6);
 
+            for (int y = 0; y < indiv1.tiles.GetLength(1); y++)
+            {
+                for (int x = 0; x < indiv1.tiles.GetLength(0); x++)
+                {
+                    if (RandomStaticProvider.RandomDouble() <= uniformRate)
+                    {
+                        newSol.tiles[x, y].SetGene(indiv1.tiles[x, y].GetPlantType());
+                    }
+                    else
+                    {
+                        newSol.tiles[x, y].SetGene(indiv2.tiles[x, y].GetPlantType());
+                    }
+                }
+
+            }
             return newSol;
         }
 
-        private static void mutate(Tile indiv)
+        private static void mutate(Individual indiv)
         {
-         
-            for (int i = 0; i < indiv.Size(); i++)
+            for (int y = 0; y < indiv.tiles.GetLength(1); y++)
             {
-                if(RandomStaticProvider.RandomDouble() <= mutationRate)
+                for (int x = 0; x < indiv.tiles.GetLength(0); x++)
                 {
-                    indiv.SetGene(i, RandomStaticProvider.RandomInteger(0,100));
+                    if (RandomStaticProvider.RandomDouble() <= mutationRate)
+                    {
+                        indiv.tiles[x, y].SetGene((Plant.PlantTypesEnum)RandomStaticProvider.RandomInteger(0, 5));
+                    }
                 }
+
             }
+
         }
 
-        private static Tile TournamentSelection(Population pop)
+        private static Individual TournamentSelection(Population pop)
         {
             Population tournament = new Population(tournamentSize);
-          
+
             for (int i = 0; i < tournamentSize; i++)
             {
                 int randomId = (int)(RandomStaticProvider.RandomDouble() * pop.Size());
                 tournament.SaveIndividual(i, pop.getIndividual(randomId));
             }
 
-            Tile fittest = tournament.GetFittest();
+            Individual fittest = tournament.GetFittest();
             return fittest;
         }
 

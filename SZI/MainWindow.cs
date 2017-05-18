@@ -75,13 +75,11 @@ namespace SZI
             {
                 lblPlantStatusText.Text = "nie dotyczy";
                 lblFertilizeStatusText.Text = "nie dotyczy";
-                lblGenes.Text = "nie dotyczy";
             }
             else
             {
                 lblPlantStatusText.Text = button.tile.plant.StringInfo();
                 lblFertilizeStatusText.Text = button.tile.fertilizeStatus.FertilizeStringInfo();
-                lblGenes.Text = button.tile.getGenes();
             }
         }
 

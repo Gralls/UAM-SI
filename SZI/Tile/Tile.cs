@@ -82,7 +82,7 @@ namespace SZI
             if (x < 0 || x >= xSize
                 || y < 0 || y >= ySize)
                 return null;
-            return allTiles[x,y];
+            return allTiles[x, y];
         }
 
         public Tile FindTile(Location pos)
@@ -99,12 +99,6 @@ namespace SZI
     {
         public Tile() : base()
         {
-            genes = new int[4];
-            for (int i = 0; i < 4; i++)
-            {
-                int gene = RandomStaticProvider.RandomInteger(0, 100);
-                genes[i] = gene;
-            }
         }
         public Location location { get; set; }
         public string tileBackgroundName { get; set; }
@@ -115,7 +109,7 @@ namespace SZI
         public Plant plant { get; set; }
         public FertilizeStatus fertilizeStatus { get; set; }
         private int[] genes;
-        public int fitness = 0;
+
         public void SetTerrainType(ITerrainType value)
         {
             if (terrainType != null)
@@ -144,7 +138,7 @@ namespace SZI
             fertilizeStatus.NextTurn();
         }
 
-        public void ChangeTerrain (string terrainName)
+        public void ChangeTerrain(string terrainName)
         {
             tileBackgroundName = terrainName;
             terrainType = TerrainFactory.GetInst().GetTerrainTypeFromTerrainName(terrainName);
@@ -166,41 +160,49 @@ namespace SZI
             tileBackgroundName = TileImageLoader.GetInstance().GetRandomImageNameCorrespondingToTerrainType(terrainType.type);
             Notify();
         }
-        public int GetGene(int index)
+        public Plant.PlantTypesEnum GetPlantType()
         {
-            return genes[index];
+            return plant.plantType;
         }
 
-        public string getGenes()
+        public string getPlantTypeName()
         {
-            return "[" + genes[0] + "," + genes[1] + "," + genes[2] + "," + genes[3] + "]";
-        }
-        public void SetGene(int index, int value)
-        {
-            genes[index] = value;
-        }
-
-        public int GetFitness()
-        {
-            if (fitness == 0)
+            string plantName;
+            switch (plant.plantType)
             {
-                fitness = FitnessCalc.GetFitness(this);
+                case Plant.PlantTypesEnum.beetroot:
+                    plantName = "Burak";
+                    break;
+                case Plant.PlantTypesEnum.walnut:
+                    plantName = "Orzech";
+                    break;
+                case Plant.PlantTypesEnum.carrot:
+                    plantName = "Marchew";
+                    break;
+                case Plant.PlantTypesEnum.flower:
+                    plantName = "Kwiat";
+                    break;
+                case Plant.PlantTypesEnum.empty:
+                    plantName = "Pusto";
+                    break;
+                case Plant.PlantTypesEnum.road:
+                    plantName = "Droga";
+                    break;
+                default:
+                    plantName = "";
+                    break;
             }
-            return fitness;
+            return plantName;
+        }
+        public void SetGene(Plant.PlantTypesEnum value)
+        {
+            plant.plantType = value;
         }
 
-        public int Size()
-        {
-            return genes.Length;
-        }
         public override string ToString()
         {
-            string geneString = "";
-            for (int i = 0; i < Size(); i++)
-            {
-                geneString += GetGene(i) + ",";
-            }
-            return geneString;
+           
+            return getPlantTypeName();
         }
     }
 }

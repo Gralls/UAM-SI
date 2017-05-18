@@ -15,7 +15,7 @@ namespace SZI
         Tile actualPlayerPosition = null;
         int turnTimer;
         int turnLength = 500;
-        int populationGrade = 0;
+        int populationFittestGrade = 0;
         public static MainLogic Instance
         {
             get
@@ -108,22 +108,23 @@ namespace SZI
         public List<string> GenerateBestPopulation()
         {
             List<string> results=new List<string>();
-            Population pop = new Population(TileContainer.GetInstance().GetTiles());
+            Population pop = new Population(50);
             int generationCount = 0;
-            populationGrade = pop.Grade();
+            populationFittestGrade = pop.GetFittest().GetFitness();
             Console.WriteLine(pop.Size());
-            while (!(FitnessCalc.getTarget() - 5 < populationGrade && populationGrade < FitnessCalc.getTarget() + 5))
+            while (populationFittestGrade < 250)
             {
-                results.Add("Generation: " + generationCount + " Grade: " + populationGrade);
+                Console.WriteLine("Generation: " + generationCount + " Fittest: " + populationFittestGrade);
+                Console.WriteLine("Genes: " +pop.GetFittest());
                 generationCount++;
 
                 pop = GeneticAlgorithm.evolvePopulation(pop);
-                populationGrade = pop.Grade();
+                populationFittestGrade = pop.GetFittest().GetFitness();
             }
             results.Add("Solution found!");
             results.Add("Generation: " + generationCount);
-            results.Add("Genes: " + pop.GetFittest());
-            results.Add("Grade: " + pop.Grade());
+            results.Add("Genes: " + pop.GetFittest().ToString());
+            results.Add("Grade: " + populationFittestGrade);
             return results;
         }
 

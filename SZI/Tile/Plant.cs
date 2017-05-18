@@ -14,6 +14,18 @@ namespace SZI
         {
             growthStatus = GrowthStatusEnum.noPlant;
             growthLevel = 0;
+            plantType= (Plant.PlantTypesEnum)RandomStaticProvider.RandomInteger(0, 5);
+        }
+        public Plant(bool isRoad)
+        {
+            growthStatus = GrowthStatusEnum.noPlant;
+            growthLevel = 0;
+            plantType = PlantTypesEnum.road;
+        }
+        public PlantTypesEnum plantType { get; set; }
+        public enum PlantTypesEnum
+        {
+            beetroot,walnut, carrot,flower, empty,road
         }
 
         public void CropStatusChange(Tile tile)
