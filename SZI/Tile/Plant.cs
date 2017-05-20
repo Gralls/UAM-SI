@@ -10,22 +10,16 @@ namespace SZI
 {
     public class Plant
     {
-        public Plant()
-        {
-            growthStatus = GrowthStatusEnum.noPlant;
-            growthLevel = 0;
-            plantType= (Plant.PlantTypesEnum)RandomStaticProvider.RandomInteger(0, 5);
-        }
         public Plant(bool isRoad)
         {
             growthStatus = GrowthStatusEnum.noPlant;
             growthLevel = 0;
-            plantType = PlantTypesEnum.road;
+            plantType = isRoad ? PlantTypesEnum.road : (Plant.PlantTypesEnum)RandomStaticProvider.RandomInteger(0, 4);
         }
         public PlantTypesEnum plantType { get; set; }
         public enum PlantTypesEnum
         {
-            beetroot,walnut, carrot,flower, empty,road
+            beetroot, walnut, carrot, flower, empty, road
         }
 
         public void CropStatusChange(Tile tile)
@@ -42,7 +36,7 @@ namespace SZI
                 growthLevel--;
             //roślina choruje jeśli oba warunki są złe
             if (!isSoilOK(terrainType) && !tile.fertilizeStatus.isFertilized)
-            { 
+            {
                 growthStatus = GrowthStatusEnum.sickPlant;
                 return;
             }
@@ -78,6 +72,22 @@ namespace SZI
             if (growthStatus == GrowthStatusEnum.sickPlant)
                 info += ", chora";
             return info;
+        }
+
+        public string PlantTypeInfo()
+        {
+            if (plantType == PlantTypesEnum.beetroot)
+                return "Burak";
+            else if (plantType == PlantTypesEnum.carrot)
+                return "Marchew";
+            else if (plantType == PlantTypesEnum.empty)
+                return "Pusto";
+            else if (plantType == PlantTypesEnum.flower)
+                return "Kwiat";
+            else if (plantType == PlantTypesEnum.walnut)
+                return "Orzech";
+            else
+                return "";
         }
 
         public void HealPlant()

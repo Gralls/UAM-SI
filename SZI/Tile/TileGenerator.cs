@@ -37,49 +37,48 @@ namespace SZI
                         tiles[x, y].fertilizeStatus = new FertilizeStatus(true);
                     else
                         tiles[x, y].fertilizeStatus = new FertilizeStatus(false);
-                    if (tiles[x, y].terrainType.type == TerrainFactory.TerrainTypesEnum.road)
-                    {
-                        tiles[x, y].plant = new Plant(true);
-                    }
-                    else
-                        tiles[x, y].plant = new Plant();
-                }
+
+              
+                    tiles[x, y].plant = new Plant(tiles[x, y].terrainType.type == TerrainFactory.TerrainTypesEnum.road);
+
+
+        }
             return tiles;
         }
 
-        public ITerrainType GetRandomTerrainType()
-        {
-            ITerrainType terrain;
-            TerrainFactory terrainFactory = TerrainFactory.GetInst();
-            int randomNumber = rnd.Next(0, 3);
-            switch (randomNumber)
-            {
-                case 0: terrain = terrainFactory.CreateDrainPlainTile(); break;
-                case 1: terrain = terrainFactory.CreateNormalPlainTile(); break;
-                case 2: terrain = terrainFactory.CreateRoadTile(); break;
-                case 3: terrain = terrainFactory.CreateWetPlainTile(); break;
-                default: terrain = terrainFactory.CreateNormalPlainTile(); break;
-            }
-            return terrain;
-        }
-    }
-    #endregion
-    class TileGenerator
+    public ITerrainType GetRandomTerrainType()
     {
-        public Tile[,] CreateTiles(ITileGeneratorStrategy strategy, int sizeX, int sizeY)
+        ITerrainType terrain;
+        TerrainFactory terrainFactory = TerrainFactory.GetInst();
+        int randomNumber = rnd.Next(0, 3);
+        switch (randomNumber)
         {
-            return strategy.GenerateTiles(sizeX, sizeY);
+            case 0: terrain = terrainFactory.CreateDrainPlainTile(); break;
+            case 1: terrain = terrainFactory.CreateNormalPlainTile(); break;
+            case 2: terrain = terrainFactory.CreateRoadTile(); break;
+            case 3: terrain = terrainFactory.CreateWetPlainTile(); break;
+            default: terrain = terrainFactory.CreateNormalPlainTile(); break;
         }
-
-        private TileGenerator()
-        {
-        }
-        private static TileGenerator instance;
-        public static TileGenerator GetInstance()
-        {
-            if (instance == null)
-                instance = new TileGenerator();
-            return instance;
-        }
+        return terrain;
     }
+}
+#endregion
+class TileGenerator
+{
+    public Tile[,] CreateTiles(ITileGeneratorStrategy strategy, int sizeX, int sizeY)
+    {
+        return strategy.GenerateTiles(sizeX, sizeY);
+    }
+
+    private TileGenerator()
+    {
+    }
+    private static TileGenerator instance;
+    public static TileGenerator GetInstance()
+    {
+        if (instance == null)
+            instance = new TileGenerator();
+        return instance;
+    }
+}
 }

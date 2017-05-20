@@ -12,14 +12,15 @@ namespace SZI.Genetics
         public Tile[,] tiles { set; get; }
         public int fitness = 0;
 
-        public Individual(int individualSizeX, int individualSizeY)
+        public Individual()
         {
-            tiles = TileGenerator.GetInstance().CreateTiles(new RandomTileGeneratorStrategy(), individualSizeX, individualSizeY);
+            tiles = TileContainer.GetInstance().GetCopyOfTiles();
+            foreach(Tile tile in tiles)
+            {
+                tile.GeneratePlants();
+            }
         }
-        public void GenerateIndivdual(int individualSizeX, int individualSizeY)
-        {
-            tiles = TileGenerator.GetInstance().CreateTiles(new RandomTileGeneratorStrategy(), individualSizeX, individualSizeY);
-        }
+       
         public int GetFitness()
         {
             if (fitness == 0)
@@ -29,7 +30,7 @@ namespace SZI.Genetics
             return fitness;
         }
 
-        public Plant.PlantTypesEnum GetIndividualGene(int x, int y)
+        public Plant.PlantTypesEnum GetPlantTypeOnCoordinates(int x, int y)
         {
             return tiles[x, y].plant.plantType;
         }

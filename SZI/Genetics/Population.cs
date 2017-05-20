@@ -15,34 +15,31 @@ namespace SZI.Genetics
             individuals = new Individual[populationSize];
             for (int i = 0; i < populationSize; i++) 
             {
-                individuals[i] = new Individual(6, 6);
+                individuals[i] = new Individual();
             }
         }
-        public Population(Individual[] individuals)
-        {
-            this.individuals = individuals;
-        }
-        public Individual getIndividual(int index)
+       
+        public Individual GetIndividual(int index)
         {
             return individuals[index];
         }
 
         public Individual GetFittest()
         {
-            return individuals.Aggregate((current, next) => Math.Abs(current.GetFitness() - FitnessCalc.getTarget()) < Math.Abs(next.GetFitness() - FitnessCalc.getTarget()) ? current : next); ;
+            return individuals.Aggregate((current, next) => Math.Abs(current.GetFitness() - FitnessCalc.GetTarget()) < Math.Abs(next.GetFitness() - FitnessCalc.GetTarget()) ? current : next); ;
         }
 
         public int Grade()
         {
             int grade = 0;
-            for (int i = 0; i < Size(); i++)
+            for (int i = 0; i < GetPopulationSize(); i++)
             {
                 grade += individuals[i].GetFitness();
             }
-            return grade / (Size());
+            return grade / (GetPopulationSize());
         }
 
-        public int Size()
+        public int GetPopulationSize()
         {
             return individuals.Length;
         }

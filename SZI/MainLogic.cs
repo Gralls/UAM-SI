@@ -111,20 +111,24 @@ namespace SZI
             Population pop = new Population(50);
             int generationCount = 0;
             populationFittestGrade = pop.GetFittest().GetFitness();
-            Console.WriteLine(pop.Size());
-            while (populationFittestGrade < 250)
+            Console.WriteLine(pop.GetPopulationSize());
+            int equalsFittestRate = 0;
+            while (equalsFittestRate < 50)
             {
                 Console.WriteLine("Generation: " + generationCount + " Fittest: " + populationFittestGrade);
-                Console.WriteLine("Genes: " +pop.GetFittest());
+                Console.WriteLine(pop.GetFittest().ToString());
                 generationCount++;
 
-                pop = GeneticAlgorithm.evolvePopulation(pop);
+                pop = GeneticAlgorithm.EvolvePopulation(pop);
+                if (populationFittestGrade == pop.GetFittest().GetFitness())
+                    equalsFittestRate++;
                 populationFittestGrade = pop.GetFittest().GetFitness();
             }
-            results.Add("Solution found!");
-            results.Add("Generation: " + generationCount);
-            results.Add("Genes: " + pop.GetFittest().ToString());
-            results.Add("Grade: " + populationFittestGrade);
+            results.Add(pop.GetFittest().ToString());
+            results.Add("Zyski: " + populationFittestGrade);
+            results.Add("Generacja: " + generationCount);
+            results.Add("Rozwiązanie znalezione!");
+            TileContainer.GetInstance().SetTiles(pop.GetFittest().tiles);
             return results;
         }
 

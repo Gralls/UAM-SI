@@ -138,7 +138,7 @@ namespace SZI
 
         private void button1_Click(object sender, EventArgs e)
         {
-           List<string>logs= MainLogic.Instance.GenerateBestPopulation();
+            List<string> logs = MainLogic.Instance.GenerateBestPopulation();
             AddLinesToGeneticsLog(logs);
         }
 
@@ -148,6 +148,11 @@ namespace SZI
         }
 
         private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
         {
 
         }

@@ -23,16 +23,16 @@ namespace SZI.Genetics
                     }
                     else if (plantType == Plant.PlantTypesEnum.empty)
                     {
-                        fitness -= 10;
+                        fitness -= 5;
                         continue;
                     }
                     else if (plantType==Plant.PlantTypesEnum.beetroot)
                     {
-                        fitness += 20;
+                        fitness += 10;
                     }
                     else if (plantType == Plant.PlantTypesEnum.carrot)
                     {
-                        fitness += 10;
+                        fitness += 7;
                     }
                     else if (plantType == Plant.PlantTypesEnum.flower)
                     {
@@ -40,16 +40,16 @@ namespace SZI.Genetics
                     }
                     else if (plantType == Plant.PlantTypesEnum.walnut)
                     {
-                        fitness += 30;
+                        fitness += 15;
                     }
 
                     if (SearchAroundPlant(individual, x, y, Plant.PlantTypesEnum.walnut))
                     {
-                        fitness -= 25;
+                        fitness -= 15;
                     }
                     else if (SearchAroundPlant(individual, x, y, Plant.PlantTypesEnum.road))
                     {
-                        fitness -= 30;
+                        fitness -= 20;
                     }
                 }
             }
@@ -57,9 +57,10 @@ namespace SZI.Genetics
             return fitness;
         }
 
-        public static int getTarget()
+
+        public static int GetTarget()
         {
-            return 250;
+            return 89;
         }
 
         public static bool SearchAroundPlant(Individual indiv, int x, int y, Plant.PlantTypesEnum plantType)

@@ -9,11 +9,12 @@ using SZI.Genetics;
 
 namespace SZI
 {
-    public class TileContainer
+    public class TileContainer 
     {
         private TileContainer()
         {
         }
+
         private static TileContainer instance;
         public static TileContainer GetInstance()
         {
@@ -32,6 +33,19 @@ namespace SZI
         public Tile[,] GetTiles()
         {
             return allTiles;
+        }
+
+        public Tile[,] GetCopyOfTiles()
+        {
+            Tile[,] newTiles = new Tile[xSize, ySize];
+            for(int y = 0; y < ySize; y++)
+            {
+                for(int x = 0; x < xSize; x++)
+                {
+                    newTiles[x, y] = allTiles[x, y].Clone();
+                }
+            }
+            return newTiles;
         }
 
         public void ClearTilesRotationExceptPlayerLocation()
@@ -89,9 +103,12 @@ namespace SZI
         {
             return FindTile(pos.x, pos.y);
         }
+
         private int xSize { get; set; }
         private int ySize { get; set; }
         private Tile[,] allTiles { get; set; }
+
+       
     }
 
     //This will be class for having informations about every tile.
@@ -194,14 +211,18 @@ namespace SZI
             }
             return plantName;
         }
-        public void SetGene(Plant.PlantTypesEnum value)
+        public void SetPlantType(Plant.PlantTypesEnum value)
         {
             plant.plantType = value;
         }
 
+        public void GeneratePlants()
+        {
+            plant = new Plant(terrainType.type == TerrainFactory.TerrainTypesEnum.road);
+        }
+
         public override string ToString()
         {
-           
             return getPlantTypeName();
         }
     }

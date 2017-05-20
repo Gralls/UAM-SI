@@ -10,13 +10,13 @@ namespace SZI.Genetics
     {
 
         private static double uniformRate = 0.5;
-        private static double mutationRate = 0.15;
+        private static double mutationRate = 0.05;
         private static int tournamentSize = 5;
         private static bool elitism = true;
 
-        public static Population evolvePopulation(Population pop)
+        public static Population EvolvePopulation(Population pop)
         {
-            Population newPopulation = new Population(pop.Size());
+            Population newPopulation = new Population(pop.GetPopulationSize());
 
             if (elitism)
             {
@@ -33,37 +33,39 @@ namespace SZI.Genetics
                 elitismOffset = 0;
             }
 
-            for (int i = elitismOffset; i < pop.Size(); i++)
+            for (int i = elitismOffset; i < pop.GetPopulationSize(); i++)
             {
                 Individual indiv1 = TournamentSelection(pop);
                 Individual indiv2 = TournamentSelection(pop);
-                Individual newIndiv = crossOver(indiv1, indiv2);
+                Individual newIndiv = CrossOver(indiv1, indiv2);
                 newPopulation.SaveIndividual(i, newIndiv);
             }
 
-            for (int i = elitismOffset; i < newPopulation.Size(); i++)
+            for (int i = elitismOffset; i < newPopulation.GetPopulationSize(); i++)
             {
-                mutate(newPopulation.getIndividual(i));
+                Mutate(newPopulation.GetIndividual(i));
             }
 
             return newPopulation;
         }
 
-        private static Individual crossOver(Individual indiv1, Individual indiv2)
+        private static Individual CrossOver(Individual indiv1, Individual indiv2)
         {
-            Individual newSol = new Individual(6, 6);
+            Individual newSol = new Individual();
 
             for (int y = 0; y < indiv1.tiles.GetLength(1); y++)
             {
                 for (int x = 0; x < indiv1.tiles.GetLength(0); x++)
                 {
+                    if (newSol.tiles[x, y].terrainType.type == TerrainFactory.TerrainTypesEnum.road)
+                        continue;
                     if (RandomStaticProvider.RandomDouble() <= uniformRate)
                     {
-                        newSol.tiles[x, y].SetGene(indiv1.tiles[x, y].GetPlantType());
+                        newSol.tiles[x, y].SetPlantType(indiv1.tiles[x, y].GetPlantType());
                     }
                     else
                     {
-                        newSol.tiles[x, y].SetGene(indiv2.tiles[x, y].GetPlantType());
+                        newSol.tiles[x, y].SetPlantType(indiv2.tiles[x, y].GetPlantType());
                     }
                 }
 
@@ -71,15 +73,17 @@ namespace SZI.Genetics
             return newSol;
         }
 
-        private static void mutate(Individual indiv)
+        private static void Mutate(Individual indiv)
         {
             for (int y = 0; y < indiv.tiles.GetLength(1); y++)
             {
                 for (int x = 0; x < indiv.tiles.GetLength(0); x++)
                 {
+                    if (indiv.tiles[x, y].terrainType.type == TerrainFactory.TerrainTypesEnum.road)
+                        continue;
                     if (RandomStaticProvider.RandomDouble() <= mutationRate)
                     {
-                        indiv.tiles[x, y].SetGene((Plant.PlantTypesEnum)RandomStaticProvider.RandomInteger(0, 5));
+                        indiv.tiles[x, y].SetPlantType((Plant.PlantTypesEnum)RandomStaticProvider.RandomInteger(0, 5));
                     }
                 }
 
@@ -93,8 +97,8 @@ namespace SZI.Genetics
 
             for (int i = 0; i < tournamentSize; i++)
             {
-                int randomId = (int)(RandomStaticProvider.RandomDouble() * pop.Size());
-                tournament.SaveIndividual(i, pop.getIndividual(randomId));
+                int randomId = (int)(RandomStaticProvider.RandomDouble() * pop.GetPopulationSize());
+                tournament.SaveIndividual(i, pop.GetIndividual(randomId));
             }
 
             Individual fittest = tournament.GetFittest();
