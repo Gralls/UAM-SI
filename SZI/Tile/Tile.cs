@@ -107,6 +107,7 @@ namespace SZI
         public RotationEnum rotationOfPlayer { get; set; }
         public Plant plant { get; set; }
         public FertilizeStatus fertilizeStatus { get; set; }
+        public TerrainFactory.TerrainTypesEnum recognizedType { get; set; }
         public void SetTerrainType(ITerrainType value)
         {
             if (terrainType != null)

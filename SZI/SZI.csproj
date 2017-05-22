@@ -96,6 +96,8 @@
     <Compile Include="ButtonWithTile.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ImageRecognition\PythonExecuter.cs" />
+    <Compile Include="ImageRecognition\TileRecognition.cs" />
     <Compile Include="Tile\Coordinates.cs" />
     <Compile Include="ID3\ID3.cs" />
     <Compile Include="MainLogic.cs" />

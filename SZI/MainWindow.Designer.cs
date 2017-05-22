@@ -42,6 +42,7 @@ namespace SZI
             this.lblFertilizeStatusText = new System.Windows.Forms.Label();
             this.rtbOrdersLog = new System.Windows.Forms.RichTextBox();
             this.lblOrdersLog = new System.Windows.Forms.Label();
+            this.Recognize = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,9 +74,9 @@ namespace SZI
             // 
             // btnRerollMap
             // 
-            this.btnRerollMap.Location = new System.Drawing.Point(694, 27);
+            this.btnRerollMap.Location = new System.Drawing.Point(504, 81);
             this.btnRerollMap.Name = "btnRerollMap";
-            this.btnRerollMap.Size = new System.Drawing.Size(75, 23);
+            this.btnRerollMap.Size = new System.Drawing.Size(91, 23);
             this.btnRerollMap.TabIndex = 2;
             this.btnRerollMap.Text = "Reroll";
             this.btnRerollMap.UseVisualStyleBackColor = true;
@@ -154,12 +155,23 @@ namespace SZI
             this.lblOrdersLog.TabIndex = 13;
             this.lblOrdersLog.Text = "Log rozkazów:";
             // 
+            // Recognize
+            // 
+            this.Recognize.Location = new System.Drawing.Point(504, 105);
+            this.Recognize.Name = "Recognize";
+            this.Recognize.Size = new System.Drawing.Size(91, 23);
+            this.Recognize.TabIndex = 14;
+            this.Recognize.Text = "Recognize tiles";
+            this.Recognize.UseVisualStyleBackColor = true;
+            this.Recognize.Click += new System.EventHandler(this.TestPython_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(781, 451);
+            this.Controls.Add(this.Recognize);
             this.Controls.Add(this.lblOrdersLog);
             this.Controls.Add(this.rtbOrdersLog);
             this.Controls.Add(this.lblFertilizeStatusText);
@@ -233,6 +245,7 @@ namespace SZI
         private Label lblFertilizeStatusText;
         private RichTextBox rtbOrdersLog;
         private Label lblOrdersLog;
+        private Button Recognize;
     }
 }
 

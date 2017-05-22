@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SZI.AstarNamespace;
+using SZI.ImageRecognition;
 
 namespace SZI
 {
@@ -114,6 +115,39 @@ namespace SZI
         private void btnRerollMap_Click(object sender, EventArgs e)
         {
             InitializeGrids();
+        }
+
+        private void TestPython_Click(object sender, EventArgs e)
+        {
+            Tile[,] tiles = TileContainer.GetInstance().GetTiles();
+            TileRecognition ir = new TileRecognition();
+            foreach (Tile tile in tiles)
+            {
+                void dis()
+                {
+                    Button button = (Button)sender;
+                    button.Text = "Error";
+                    button.Enabled = false;
+                }
+
+                String result = ir.recognizeTile(tile);
+                if (result == null)
+                {
+                    dis();
+                    return;
+                }
+
+                if (result.Contains("dry"))
+                    tile.recognizedType = TerrainFactory.TerrainTypesEnum.dryPlain;
+                else if (result.Contains("normal"))
+                    tile.recognizedType = TerrainFactory.TerrainTypesEnum.normalPlain;
+                else if (result.Contains("road"))
+                    tile.recognizedType = TerrainFactory.TerrainTypesEnum.road;
+                else if (result.Contains("wet"))
+                    tile.recognizedType = TerrainFactory.TerrainTypesEnum.wetPlain;
+                else
+                    dis(); 
+            }
         }
     }
 }
