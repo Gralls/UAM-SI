@@ -43,6 +43,8 @@ namespace SZI
             this.rtbOrdersLog = new System.Windows.Forms.RichTextBox();
             this.lblOrdersLog = new System.Windows.Forms.Label();
             this.Recognize = new System.Windows.Forms.Button();
+            this.lblRecognizedTerrainTypeInfo = new System.Windows.Forms.Label();
+            this.lblRecognizedTerrainTypeText = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -104,11 +106,12 @@ namespace SZI
             // lblPlantStatusInfo
             // 
             this.lblPlantStatusInfo.AutoSize = true;
-            this.lblPlantStatusInfo.Location = new System.Drawing.Point(636, 98);
+            this.lblPlantStatusInfo.Location = new System.Drawing.Point(633, 98);
             this.lblPlantStatusInfo.Name = "lblPlantStatusInfo";
             this.lblPlantStatusInfo.Size = new System.Drawing.Size(44, 13);
             this.lblPlantStatusInfo.TabIndex = 8;
             this.lblPlantStatusInfo.Text = "Rośliny:";
+            this.lblPlantStatusInfo.Click += new System.EventHandler(this.lblPlantStatusInfo_Click);
             // 
             // lblPlantStatusText
             // 
@@ -122,7 +125,7 @@ namespace SZI
             // lblFertilizeStatusInfo
             // 
             this.lblFertilizeStatusInfo.AutoSize = true;
-            this.lblFertilizeStatusInfo.Location = new System.Drawing.Point(636, 115);
+            this.lblFertilizeStatusInfo.Location = new System.Drawing.Point(633, 115);
             this.lblFertilizeStatusInfo.Name = "lblFertilizeStatusInfo";
             this.lblFertilizeStatusInfo.Size = new System.Drawing.Size(61, 13);
             this.lblFertilizeStatusInfo.TabIndex = 10;
@@ -136,6 +139,7 @@ namespace SZI
             this.lblFertilizeStatusText.Size = new System.Drawing.Size(10, 13);
             this.lblFertilizeStatusText.TabIndex = 11;
             this.lblFertilizeStatusText.Text = " ";
+            this.lblFertilizeStatusText.Click += new System.EventHandler(this.lblFertilizeStatusText_Click);
             // 
             // rtbOrdersLog
             // 
@@ -165,12 +169,36 @@ namespace SZI
             this.Recognize.UseVisualStyleBackColor = true;
             this.Recognize.Click += new System.EventHandler(this.TestPython_Click);
             // 
+            // lblRecognizedTerrainTypeInfo
+            // 
+            this.lblRecognizedTerrainTypeInfo.AutoSize = true;
+            this.lblRecognizedTerrainTypeInfo.Location = new System.Drawing.Point(633, 128);
+            this.lblRecognizedTerrainTypeInfo.Name = "lblRecognizedTerrainTypeInfo";
+            this.lblRecognizedTerrainTypeInfo.Size = new System.Drawing.Size(119, 13);
+            this.lblRecognizedTerrainTypeInfo.TabIndex = 15;
+            this.lblRecognizedTerrainTypeInfo.Text = "Rozpoznany typ terenu:";
+            this.lblRecognizedTerrainTypeInfo.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lblRecognizedTerrainTypeInfo.Visible = false;
+            this.lblRecognizedTerrainTypeInfo.Click += new System.EventHandler(this.lblRecognizedTerrainTypeInfo_Click);
+            // 
+            // lblRecognizedTerrainTypeText
+            // 
+            this.lblRecognizedTerrainTypeText.AutoSize = true;
+            this.lblRecognizedTerrainTypeText.Location = new System.Drawing.Point(758, 128);
+            this.lblRecognizedTerrainTypeText.Name = "lblRecognizedTerrainTypeText";
+            this.lblRecognizedTerrainTypeText.Size = new System.Drawing.Size(0, 13);
+            this.lblRecognizedTerrainTypeText.TabIndex = 16;
+            this.lblRecognizedTerrainTypeText.Visible = false;
+            this.lblRecognizedTerrainTypeText.Click += new System.EventHandler(this.label1_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(781, 451);
+            this.Controls.Add(this.lblRecognizedTerrainTypeText);
+            this.Controls.Add(this.lblRecognizedTerrainTypeInfo);
             this.Controls.Add(this.Recognize);
             this.Controls.Add(this.lblOrdersLog);
             this.Controls.Add(this.rtbOrdersLog);
@@ -246,6 +274,8 @@ namespace SZI
         private RichTextBox rtbOrdersLog;
         private Label lblOrdersLog;
         private Button Recognize;
+        private Label lblRecognizedTerrainTypeInfo;
+        private Label lblRecognizedTerrainTypeText;
     }
 }
 

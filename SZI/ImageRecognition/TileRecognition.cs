@@ -19,7 +19,9 @@ namespace SZI.ImageRecognition
         {
             string imageToRecognize = tile.tileBackgroundName;
             PythonExecuter exec = new PythonExecuter();
-            return exec.runCommand(commandForImageRecognition, imageToRecognize);
+            string recognitionResult = exec.runCommand(commandForImageRecognition, imageToRecognize);
+            string ret = recognitionResult.Split(new[] { '\r', '\n' }).FirstOrDefault();
+            return ret;
         }
     }
 }

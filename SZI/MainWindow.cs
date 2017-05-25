@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SZI.AstarNamespace;
 using SZI.ImageRecognition;
-
+using System.Threading;
 namespace SZI
 {
     public partial class MainWindow : Form
@@ -66,13 +66,14 @@ namespace SZI
             {
                 lblPlantStatusText.Text = "nie dotyczy";
                 lblFertilizeStatusText.Text = "nie dotyczy";
-
             }
             else
             {
                 lblPlantStatusText.Text = button.tile.plant.StringInfo();
                 lblFertilizeStatusText.Text = button.tile.fertilizeStatus.FertilizeStringInfo();
             }
+            if (button.tile.recognizedTerrainType != null)
+                lblRecognizedTerrainTypeText.Text = button.tile.recognizedTerrainType.name;
         }
 
         private void gridClick(object sender, MouseEventArgs e)
@@ -117,37 +118,63 @@ namespace SZI
             InitializeGrids();
         }
 
-        private void TestPython_Click(object sender, EventArgs e)
+        private async void TestPython_Click(object sender, EventArgs e)
         {
             Tile[,] tiles = TileContainer.GetInstance().GetTiles();
+
             TileRecognition ir = new TileRecognition();
             foreach (Tile tile in tiles)
             {
-                void dis()
+                void disable()
                 {
                     Button button = (Button)sender;
                     button.Text = "Error";
                     button.Enabled = false;
-                }
-
-                String result = ir.recognizeTile(tile);
-                if (result == null)
-                {
-                    dis();
                     return;
                 }
 
+                String result = null;
+                await Task.Run(() => 
+                {
+                    result = ir.recognizeTile(tile);
+                });
+                
+                if (result == null)
+                    disable();
+
                 if (result.Contains("dry"))
-                    tile.recognizedType = TerrainFactory.TerrainTypesEnum.dryPlain;
+                    tile.recognizedTerrainType = TerrainFactory.GetInst().CreateTerrainType(TerrainFactory.TerrainTypesEnum.dryPlain);
                 else if (result.Contains("normal"))
-                    tile.recognizedType = TerrainFactory.TerrainTypesEnum.normalPlain;
+                    tile.recognizedTerrainType = TerrainFactory.GetInst().CreateTerrainType(TerrainFactory.TerrainTypesEnum.normalPlain);
                 else if (result.Contains("road"))
-                    tile.recognizedType = TerrainFactory.TerrainTypesEnum.road;
+                    tile.recognizedTerrainType = TerrainFactory.GetInst().CreateTerrainType(TerrainFactory.TerrainTypesEnum.road);
                 else if (result.Contains("wet"))
-                    tile.recognizedType = TerrainFactory.TerrainTypesEnum.wetPlain;
+                    tile.recognizedTerrainType = TerrainFactory.GetInst().CreateTerrainType(TerrainFactory.TerrainTypesEnum.road);
                 else
-                    dis(); 
+                    disable(); 
             }
+            this.lblRecognizedTerrainTypeInfo.Visible = true;
+            this.lblRecognizedTerrainTypeText.Visible = true;
+        }
+
+        private void lblFertilizeStatusText_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblPlantStatusInfo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblRecognizedTerrainTypeInfo_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
