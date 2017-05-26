@@ -12,7 +12,6 @@ namespace SZI
         public enum TerrainTypesEnum {
             dryPlain, normalPlain, wetPlain, //pola
             road, //inne
-            undefined
         };
         private TerrainFactory()
         {

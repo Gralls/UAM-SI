@@ -121,40 +121,28 @@ namespace SZI
         private async void TestPython_Click(object sender, EventArgs e)
         {
             Tile[,] tiles = TileContainer.GetInstance().GetTiles();
-
-            TileRecognition ir = new TileRecognition();
-            foreach (Tile tile in tiles)
-            {
-                void disable()
-                {
-                    Button button = (Button)sender;
-                    button.Text = "Error";
-                    button.Enabled = false;
-                    return;
-                }
-
-                String result = null;
-                await Task.Run(() => 
-                {
-                    result = ir.recognizeTile(tile);
-                });
-                
-                if (result == null)
-                    disable();
-
-                if (result.Contains("dry"))
-                    tile.recognizedTerrainType = TerrainFactory.GetInst().CreateTerrainType(TerrainFactory.TerrainTypesEnum.dryPlain);
-                else if (result.Contains("normal"))
-                    tile.recognizedTerrainType = TerrainFactory.GetInst().CreateTerrainType(TerrainFactory.TerrainTypesEnum.normalPlain);
-                else if (result.Contains("road"))
-                    tile.recognizedTerrainType = TerrainFactory.GetInst().CreateTerrainType(TerrainFactory.TerrainTypesEnum.road);
-                else if (result.Contains("wet"))
-                    tile.recognizedTerrainType = TerrainFactory.GetInst().CreateTerrainType(TerrainFactory.TerrainTypesEnum.road);
-                else
-                    disable(); 
-            }
             this.lblRecognizedTerrainTypeInfo.Visible = true;
             this.lblRecognizedTerrainTypeText.Visible = true;
+            void disable()
+            {
+                Button button = (Button)sender;
+                button.Text = "Error";
+                button.Enabled = false;
+                return;
+            }
+            TileRecognition ir = new TileRecognition();
+            
+            String result = null;
+            await Task.Run(() => 
+            {
+                bool isGood = ir.recognizeTiles(tiles);
+                if (!isGood)
+                {
+                    disable();
+                }
+            });
+                
+            
         }
 
         private void lblFertilizeStatusText_Click(object sender, EventArgs e)
