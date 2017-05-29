@@ -129,18 +129,21 @@ namespace SZI
             }
             TileRecognition ir = new TileRecognition();
             modButton("Working...", false);
-
+            bool isGood = true;
             await Task.Run(() => 
             {
-                bool isGood = ir.recognizeTiles(tiles);
-                if (!isGood)
-                {
-                    modButton("Error", false);
-                }
+                isGood = ir.recognizeTiles(tiles);
             });
-            this.lblRecognizedTerrainTypeInfo.Visible = true;
-            this.lblRecognizedTerrainTypeText.Visible = true;
-            modButton("Recognize tiles", true);
+            if (!isGood)
+            {
+                modButton("ERROR", false);
+            }
+            else
+            {
+                this.lblRecognizedTerrainTypeInfo.Visible = true;
+                this.lblRecognizedTerrainTypeText.Visible = true;
+                modButton("Recognize tiles", true);
+            }
                 
             
         }
