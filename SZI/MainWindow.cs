@@ -21,7 +21,19 @@ namespace SZI
             InitializeGrids();
         }
 
+        public void AddLinesToOrdersLog(string orders)
+        {
+            rtbOrdersLog.Text = orders + "\n" + rtbOrdersLog.Text;
+        }
         
+        public void AddLinesToOrdersLog(List<string> orders)
+        {
+            if (orders == null)
+                return;
+            foreach (string str in orders)
+                AddLinesToOrdersLog(str);
+        }
+
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
@@ -38,24 +50,6 @@ namespace SZI
            
         }
 
-        public List<Tile> PopulateTileArray()
-        {
-            List<Tile> tileList = new List<Tile>();
-            //TODO: przejście na tablice Button[,] grids
-            foreach (Control c in this.Controls)
-            {
-                if (c is Button && Regex.IsMatch(c.Name, "^grid.+"))
-                {
-
-                    Location coords = ButtonToPositionMapper.getPosition((Button)c);
-                    //TileImage image. = c.BackgroundImage
-
-                    //tileList.Add(c);
-                }
-            }
-            return tileList;
-        }
-
         private Location ConvertPositionToLocation(System.Drawing.Point position)
         {
             int x = (position.X - locationStartX) / (sizeOfGrid + spaceBeetwenGrids);
@@ -67,6 +61,17 @@ namespace SZI
         {
             ButtonWithTile button = (ButtonWithTile)sender;
             lblTerrainTypeText.Text = button.tile.terrainType.name;
+            if (button.tile.terrainType.type == TerrainFactory.TerrainTypesEnum.road)
+            {
+                lblPlantStatusText.Text = "nie dotyczy";
+                lblFertilizeStatusText.Text = "nie dotyczy";
+
+            }
+            else
+            {
+                lblPlantStatusText.Text = button.tile.plant.StringInfo();
+                lblFertilizeStatusText.Text = button.tile.fertilizeStatus.FertilizeStringInfo();
+            }
         }
 
         private void gridClick(object sender, MouseEventArgs e)
@@ -77,28 +82,22 @@ namespace SZI
                 TilePropertiesWindow tileProperties = new TilePropertiesWindow(button);
                 tileProperties.Show();
             }
-
-            if (e.Button == MouseButtons.Left)
+            else if (e.Button == MouseButtons.Middle)
             {
-                Astar astar = new Astar();
+                Location target = ConvertPositionToLocation(button.Location);
+                Tile tile = TileContainer.GetInstance().FindTile(target);
+                MainLogic.Instance.MovePlayer(TileContainer.GetInstance().FindTile(target));
+                List<string> ordersLog = MainLogic.Instance.StartWorkAtTile(tile);
+                AddLinesToOrdersLog(ordersLog);
+                GridMouseOver(sender, e);
+            }
+            else if (e.Button == MouseButtons.Left)
+            {
                 Tile playerPos = MainLogic.Instance.GetActualPlayerTile();
                 if (playerPos == null)
                     return;
                 Location target = ConvertPositionToLocation(button.Location);
-                List<Tile> locationsVisited = astar.GetPath(
-                    playerPos, 
-                    TileContainer.GetInstance().FindTile(target));
-                ;
-                foreach (Tile location in locationsVisited)
-                {
-                    int sleepTime = 250;
-                    System.Threading.Thread.Sleep(sleepTime);
-                    Tile actualTile = TileContainer.GetInstance().FindTile(location.location);
-                    actualTile = location;
-                    MainLogic.Instance.SetActualPlayerTile(actualTile);
-                    actualTile.Notify();
-                }
-                TileContainer.GetInstance().ClearTilesRotationExceptPlayerLocation();
+                MainLogic.Instance.MovePlayer(TileContainer.GetInstance().FindTile(target));
             }
         }
 
