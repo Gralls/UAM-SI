@@ -121,26 +121,26 @@ namespace SZI
         private async void TestPython_Click(object sender, EventArgs e)
         {
             Tile[,] tiles = TileContainer.GetInstance().GetTiles();
-            this.lblRecognizedTerrainTypeInfo.Visible = true;
-            this.lblRecognizedTerrainTypeText.Visible = true;
-            void disable()
+            Button button = (Button)sender;
+            void modButton(String text, bool isEnabled)
             {
-                Button button = (Button)sender;
-                button.Text = "Error";
-                button.Enabled = false;
-                return;
+                button.Text = text;
+                button.Enabled = isEnabled;
             }
             TileRecognition ir = new TileRecognition();
-            
-            String result = null;
+            modButton("Working...", false);
+
             await Task.Run(() => 
             {
                 bool isGood = ir.recognizeTiles(tiles);
                 if (!isGood)
                 {
-                    disable();
+                    modButton("Error", false);
                 }
             });
+            this.lblRecognizedTerrainTypeInfo.Visible = true;
+            this.lblRecognizedTerrainTypeText.Visible = true;
+            modButton("Recognize tiles", true);
                 
             
         }

@@ -88,7 +88,7 @@ namespace SZI
             // lblTerrainTypeInfo
             // 
             this.lblTerrainTypeInfo.AutoSize = true;
-            this.lblTerrainTypeInfo.Location = new System.Drawing.Point(633, 81);
+            this.lblTerrainTypeInfo.Location = new System.Drawing.Point(610, 69);
             this.lblTerrainTypeInfo.Name = "lblTerrainTypeInfo";
             this.lblTerrainTypeInfo.Size = new System.Drawing.Size(61, 13);
             this.lblTerrainTypeInfo.TabIndex = 5;
@@ -97,7 +97,7 @@ namespace SZI
             // lblTerrainTypeText
             // 
             this.lblTerrainTypeText.AutoSize = true;
-            this.lblTerrainTypeText.Location = new System.Drawing.Point(701, 81);
+            this.lblTerrainTypeText.Location = new System.Drawing.Point(678, 69);
             this.lblTerrainTypeText.Name = "lblTerrainTypeText";
             this.lblTerrainTypeText.Size = new System.Drawing.Size(10, 13);
             this.lblTerrainTypeText.TabIndex = 7;
@@ -106,7 +106,7 @@ namespace SZI
             // lblPlantStatusInfo
             // 
             this.lblPlantStatusInfo.AutoSize = true;
-            this.lblPlantStatusInfo.Location = new System.Drawing.Point(633, 98);
+            this.lblPlantStatusInfo.Location = new System.Drawing.Point(610, 86);
             this.lblPlantStatusInfo.Name = "lblPlantStatusInfo";
             this.lblPlantStatusInfo.Size = new System.Drawing.Size(44, 13);
             this.lblPlantStatusInfo.TabIndex = 8;
@@ -116,7 +116,7 @@ namespace SZI
             // lblPlantStatusText
             // 
             this.lblPlantStatusText.AutoSize = true;
-            this.lblPlantStatusText.Location = new System.Drawing.Point(701, 98);
+            this.lblPlantStatusText.Location = new System.Drawing.Point(678, 86);
             this.lblPlantStatusText.Name = "lblPlantStatusText";
             this.lblPlantStatusText.Size = new System.Drawing.Size(10, 13);
             this.lblPlantStatusText.TabIndex = 9;
@@ -125,7 +125,7 @@ namespace SZI
             // lblFertilizeStatusInfo
             // 
             this.lblFertilizeStatusInfo.AutoSize = true;
-            this.lblFertilizeStatusInfo.Location = new System.Drawing.Point(633, 115);
+            this.lblFertilizeStatusInfo.Location = new System.Drawing.Point(610, 103);
             this.lblFertilizeStatusInfo.Name = "lblFertilizeStatusInfo";
             this.lblFertilizeStatusInfo.Size = new System.Drawing.Size(61, 13);
             this.lblFertilizeStatusInfo.TabIndex = 10;
@@ -134,7 +134,7 @@ namespace SZI
             // lblFertilizeStatusText
             // 
             this.lblFertilizeStatusText.AutoSize = true;
-            this.lblFertilizeStatusText.Location = new System.Drawing.Point(701, 115);
+            this.lblFertilizeStatusText.Location = new System.Drawing.Point(678, 103);
             this.lblFertilizeStatusText.Name = "lblFertilizeStatusText";
             this.lblFertilizeStatusText.Size = new System.Drawing.Size(10, 13);
             this.lblFertilizeStatusText.TabIndex = 11;
@@ -172,7 +172,7 @@ namespace SZI
             // lblRecognizedTerrainTypeInfo
             // 
             this.lblRecognizedTerrainTypeInfo.AutoSize = true;
-            this.lblRecognizedTerrainTypeInfo.Location = new System.Drawing.Point(633, 128);
+            this.lblRecognizedTerrainTypeInfo.Location = new System.Drawing.Point(610, 128);
             this.lblRecognizedTerrainTypeInfo.Name = "lblRecognizedTerrainTypeInfo";
             this.lblRecognizedTerrainTypeInfo.Size = new System.Drawing.Size(119, 13);
             this.lblRecognizedTerrainTypeInfo.TabIndex = 15;
