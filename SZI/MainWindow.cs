@@ -167,5 +167,13 @@ namespace SZI
         {
 
         }
+
+        
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            PictureBox box = (PictureBox)sender;
+            box.Image = Image.FromFile(@MainLogic.Instance.GenerateWeatherImage());
+
+        }
     }
 }

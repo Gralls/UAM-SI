@@ -102,5 +102,13 @@ namespace SZI
                 ordersLog.Add("Zakończono kolejkę rozkazów.");
             return ordersLog;
         }
+        public string GenerateWeatherImage()
+        {
+            Random rand = new Random();
+            int type = rand.Next(0, 4);
+            return TileImageLoader.GetInstance().GetRandomWeatherImageName((TileImageLoader.WeatherTypes)type); 
+        }
+
+
     }
 }

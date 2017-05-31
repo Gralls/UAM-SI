@@ -12,7 +12,7 @@ namespace SZI.ImageRecognition
 
     public class PythonExecuter
     {
-        static private String pythonFullPath = "C:\\Useful\\Python352\\python.exe";
+        static private String pythonFullPath = "C:\\Python\\Python35\\python.exe";
         private bool pythonTestPassed = false;
 
 

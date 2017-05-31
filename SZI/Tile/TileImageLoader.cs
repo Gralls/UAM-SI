@@ -14,6 +14,25 @@ namespace SZI
     {
         Random rand = new Random();
 
+        public enum WeatherTypes
+        {
+           sunny, cloudy, rainy, snowy
+        };
+
+        public string GetRandomWeatherImageName(WeatherTypes type)
+        {
+            string regexStr;
+            switch (type)
+            {
+                case WeatherTypes.sunny: regexStr = "sunny*"; break;
+                case WeatherTypes.cloudy: regexStr = "cloudy*"; break;
+                case WeatherTypes.rainy: regexStr = "rainy*"; break;
+                case WeatherTypes.snowy: regexStr = "snowy*"; break;
+                default: regexStr = "sunny*"; break;
+            }
+            return GetRandomImageNameMatchingRegex(regexStr);
+        }
+
         public string GetRandomImageNameCorrespondingToTerrainType(TerrainTypesEnum type)
         {
             string regexStr;
