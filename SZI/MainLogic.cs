@@ -122,6 +122,8 @@ namespace SZI
                 pop = GeneticAlgorithm.EvolvePopulation(pop);
                 if (populationFittestGrade == pop.GetFittest().GetFitness())
                     equalsFittestRate++;
+                else
+                    equalsFittestRate = 0;
                 populationFittestGrade = pop.GetFittest().GetFitness();
             }
             results.Add(pop.GetFittest().ToString());

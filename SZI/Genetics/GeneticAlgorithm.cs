@@ -83,7 +83,7 @@ namespace SZI.Genetics
                         continue;
                     if (RandomStaticProvider.RandomDouble() <= mutationRate)
                     {
-                        indiv.tiles[x, y].SetPlantType((Plant.PlantTypesEnum)RandomStaticProvider.RandomInteger(0, 5));
+                        indiv.tiles[x, y].SetPlantType((Plant.PlantTypesEnum)RandomStaticProvider.RandomInteger(0, 4));
                     }
                 }
 

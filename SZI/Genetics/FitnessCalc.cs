@@ -45,11 +45,11 @@ namespace SZI.Genetics
 
                     if (SearchAroundPlant(individual, x, y, Plant.PlantTypesEnum.walnut))
                     {
-                        fitness -= 15;
+                        fitness -= 10;
                     }
                     else if (SearchAroundPlant(individual, x, y, Plant.PlantTypesEnum.road))
                     {
-                        fitness -= 20;
+                        fitness -= 15;
                     }
                 }
             }
@@ -60,7 +60,7 @@ namespace SZI.Genetics
 
         public static int GetTarget()
         {
-            return 89;
+            return 125;
         }
 
         public static bool SearchAroundPlant(Individual indiv, int x, int y, Plant.PlantTypesEnum plantType)
