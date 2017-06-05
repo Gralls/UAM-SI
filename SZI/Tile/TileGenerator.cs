@@ -23,7 +23,7 @@ namespace SZI
         }
         public Tile[,] GenerateTiles(int sizeX, int sizeY)
         {
-            Tile[,] tiles = new Tile[sizeX,sizeY];
+            Tile[,] tiles = new Tile[sizeX, sizeY];
             TileImageLoader imageLoader = TileImageLoader.GetInstance();
             for (int x = 0; x < sizeY; x++)
                 for (int y = 0; y < sizeX; y++)
@@ -33,11 +33,11 @@ namespace SZI
                     tiles[x, y].SetTerrainType(GetRandomTerrainType());
                     tiles[x, y].tileBackgroundName = imageLoader.GetRandomImageNameCorrespondingToTerrainType(tiles[x, y].terrainType.type);
                     int randomNumber = rnd.Next(0, 10);
-                    if (randomNumber%2 == 0)
+                    if (randomNumber % 2 == 0)
                         tiles[x, y].fertilizeStatus = new FertilizeStatus(true);
                     else
                         tiles[x, y].fertilizeStatus = new FertilizeStatus(false);
-                    tiles[x, y].plant = new Plant();
+                    tiles[x, y].plant = new Plant(tiles[x, y].terrainType.type==TerrainFactory.TerrainTypesEnum.road?true:false);
                 }
             return tiles;
         }
