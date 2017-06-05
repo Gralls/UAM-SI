@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SZI.AstarNamespace;
+using SZI.Genetics;
 
 namespace SZI
 {
@@ -14,6 +15,7 @@ namespace SZI
         Tile actualPlayerPosition = null;
         int turnTimer;
         int turnLength = 500;
+        int populationFittestGrade = 0;
         public static MainLogic Instance
         {
             get
@@ -102,5 +104,36 @@ namespace SZI
                 ordersLog.Add("Zakończono kolejkę rozkazów.");
             return ordersLog;
         }
+
+        public List<string> GenerateBestPopulation()
+        {
+            List<string> results=new List<string>();
+            Population pop = new Population(50);
+            int generationCount = 0;
+            populationFittestGrade = pop.GetFittest().GetFitness();
+            Console.WriteLine(pop.GetPopulationSize());
+            int equalsFittestRate = 0;
+            while (equalsFittestRate < 50)
+            {
+                Console.WriteLine("Generation: " + generationCount + " Fittest: " + populationFittestGrade);
+                Console.WriteLine(pop.GetFittest().ToString());
+                generationCount++;
+
+                pop = GeneticAlgorithm.EvolvePopulation(pop);
+                if (populationFittestGrade == pop.GetFittest().GetFitness())
+                    equalsFittestRate++;
+                else
+                    equalsFittestRate = 0;
+                populationFittestGrade = pop.GetFittest().GetFitness();
+            }
+            results.Add(pop.GetFittest().ToString());
+            results.Add("Zyski: " + populationFittestGrade);
+            results.Add("Generacja: " + generationCount);
+            results.Add("Rozwiązanie znalezione!");
+            TileContainer.GetInstance().SetTiles(pop.GetFittest().tiles);
+            return results;
+        }
+
+      
     }
 }

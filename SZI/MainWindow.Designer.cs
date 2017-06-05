@@ -42,6 +42,8 @@ namespace SZI
             this.lblFertilizeStatusText = new System.Windows.Forms.Label();
             this.rtbOrdersLog = new System.Windows.Forms.RichTextBox();
             this.lblOrdersLog = new System.Windows.Forms.Label();
+            this.geneticAlgorithm = new System.Windows.Forms.Button();
+            this.rtbGeneticLog = new System.Windows.Forms.RichTextBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,32 +52,35 @@ namespace SZI
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
             this.fileToolStripMenuItem.Text = "File";
             this.fileToolStripMenuItem.Click += new System.EventHandler(this.fileToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(108, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // menuStrip1
             // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(781, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(1579, 28);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // btnRerollMap
             // 
-            this.btnRerollMap.Location = new System.Drawing.Point(694, 27);
+            this.btnRerollMap.Location = new System.Drawing.Point(925, 33);
+            this.btnRerollMap.Margin = new System.Windows.Forms.Padding(4);
             this.btnRerollMap.Name = "btnRerollMap";
-            this.btnRerollMap.Size = new System.Drawing.Size(75, 23);
+            this.btnRerollMap.Size = new System.Drawing.Size(100, 28);
             this.btnRerollMap.TabIndex = 2;
             this.btnRerollMap.Text = "Reroll";
             this.btnRerollMap.UseVisualStyleBackColor = true;
@@ -85,81 +90,113 @@ namespace SZI
             // lblTerrainTypeInfo
             // 
             this.lblTerrainTypeInfo.AutoSize = true;
-            this.lblTerrainTypeInfo.Location = new System.Drawing.Point(633, 81);
+            this.lblTerrainTypeInfo.Location = new System.Drawing.Point(844, 100);
+            this.lblTerrainTypeInfo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTerrainTypeInfo.Name = "lblTerrainTypeInfo";
-            this.lblTerrainTypeInfo.Size = new System.Drawing.Size(61, 13);
+            this.lblTerrainTypeInfo.Size = new System.Drawing.Size(81, 17);
             this.lblTerrainTypeInfo.TabIndex = 5;
             this.lblTerrainTypeInfo.Text = "Typ terenu:";
             // 
             // lblTerrainTypeText
             // 
             this.lblTerrainTypeText.AutoSize = true;
-            this.lblTerrainTypeText.Location = new System.Drawing.Point(701, 81);
+            this.lblTerrainTypeText.Location = new System.Drawing.Point(935, 100);
+            this.lblTerrainTypeText.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTerrainTypeText.Name = "lblTerrainTypeText";
-            this.lblTerrainTypeText.Size = new System.Drawing.Size(10, 13);
+            this.lblTerrainTypeText.Size = new System.Drawing.Size(12, 17);
             this.lblTerrainTypeText.TabIndex = 7;
             this.lblTerrainTypeText.Text = " ";
+            this.lblTerrainTypeText.Click += new System.EventHandler(this.lblTerrainTypeText_Click);
             // 
             // lblPlantStatusInfo
             // 
             this.lblPlantStatusInfo.AutoSize = true;
-            this.lblPlantStatusInfo.Location = new System.Drawing.Point(636, 98);
+            this.lblPlantStatusInfo.Location = new System.Drawing.Point(848, 121);
+            this.lblPlantStatusInfo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPlantStatusInfo.Name = "lblPlantStatusInfo";
-            this.lblPlantStatusInfo.Size = new System.Drawing.Size(44, 13);
+            this.lblPlantStatusInfo.Size = new System.Drawing.Size(58, 17);
             this.lblPlantStatusInfo.TabIndex = 8;
             this.lblPlantStatusInfo.Text = "Rośliny:";
             // 
             // lblPlantStatusText
             // 
             this.lblPlantStatusText.AutoSize = true;
-            this.lblPlantStatusText.Location = new System.Drawing.Point(701, 98);
+            this.lblPlantStatusText.Location = new System.Drawing.Point(935, 121);
+            this.lblPlantStatusText.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPlantStatusText.Name = "lblPlantStatusText";
-            this.lblPlantStatusText.Size = new System.Drawing.Size(10, 13);
+            this.lblPlantStatusText.Size = new System.Drawing.Size(12, 17);
             this.lblPlantStatusText.TabIndex = 9;
             this.lblPlantStatusText.Text = " ";
             // 
             // lblFertilizeStatusInfo
             // 
             this.lblFertilizeStatusInfo.AutoSize = true;
-            this.lblFertilizeStatusInfo.Location = new System.Drawing.Point(636, 115);
+            this.lblFertilizeStatusInfo.Location = new System.Drawing.Point(848, 142);
+            this.lblFertilizeStatusInfo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFertilizeStatusInfo.Name = "lblFertilizeStatusInfo";
-            this.lblFertilizeStatusInfo.Size = new System.Drawing.Size(61, 13);
+            this.lblFertilizeStatusInfo.Size = new System.Drawing.Size(78, 17);
             this.lblFertilizeStatusInfo.TabIndex = 10;
             this.lblFertilizeStatusInfo.Text = "Nawożona:";
             // 
             // lblFertilizeStatusText
             // 
             this.lblFertilizeStatusText.AutoSize = true;
-            this.lblFertilizeStatusText.Location = new System.Drawing.Point(701, 115);
+            this.lblFertilizeStatusText.Location = new System.Drawing.Point(935, 142);
+            this.lblFertilizeStatusText.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFertilizeStatusText.Name = "lblFertilizeStatusText";
-            this.lblFertilizeStatusText.Size = new System.Drawing.Size(10, 13);
+            this.lblFertilizeStatusText.Size = new System.Drawing.Size(12, 17);
             this.lblFertilizeStatusText.TabIndex = 11;
             this.lblFertilizeStatusText.Text = " ";
             // 
             // rtbOrdersLog
             // 
-            this.rtbOrdersLog.Location = new System.Drawing.Point(506, 154);
+            this.rtbOrdersLog.Location = new System.Drawing.Point(675, 190);
+            this.rtbOrdersLog.Margin = new System.Windows.Forms.Padding(4);
             this.rtbOrdersLog.Name = "rtbOrdersLog";
             this.rtbOrdersLog.ReadOnly = true;
-            this.rtbOrdersLog.Size = new System.Drawing.Size(263, 222);
+            this.rtbOrdersLog.Size = new System.Drawing.Size(349, 272);
             this.rtbOrdersLog.TabIndex = 12;
             this.rtbOrdersLog.Text = "";
             // 
             // lblOrdersLog
             // 
             this.lblOrdersLog.AutoSize = true;
-            this.lblOrdersLog.Location = new System.Drawing.Point(503, 138);
+            this.lblOrdersLog.Location = new System.Drawing.Point(671, 170);
+            this.lblOrdersLog.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblOrdersLog.Name = "lblOrdersLog";
-            this.lblOrdersLog.Size = new System.Drawing.Size(76, 13);
+            this.lblOrdersLog.Size = new System.Drawing.Size(99, 17);
             this.lblOrdersLog.TabIndex = 13;
             this.lblOrdersLog.Text = "Log rozkazów:";
             // 
+            // geneticAlgorithm
+            // 
+            this.geneticAlgorithm.Location = new System.Drawing.Point(1100, 158);
+            this.geneticAlgorithm.Margin = new System.Windows.Forms.Padding(4);
+            this.geneticAlgorithm.Name = "geneticAlgorithm";
+            this.geneticAlgorithm.Size = new System.Drawing.Size(196, 28);
+            this.geneticAlgorithm.TabIndex = 16;
+            this.geneticAlgorithm.Text = "Znajdź najlepsze rozłożenie";
+            this.geneticAlgorithm.UseVisualStyleBackColor = true;
+            this.geneticAlgorithm.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // rtbGeneticLog
+            // 
+            this.rtbGeneticLog.Location = new System.Drawing.Point(1033, 190);
+            this.rtbGeneticLog.Margin = new System.Windows.Forms.Padding(4);
+            this.rtbGeneticLog.Name = "rtbGeneticLog";
+            this.rtbGeneticLog.ReadOnly = true;
+            this.rtbGeneticLog.Size = new System.Drawing.Size(465, 272);
+            this.rtbGeneticLog.TabIndex = 19;
+            this.rtbGeneticLog.Text = "";
+            // 
             // MainWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(781, 451);
+            this.ClientSize = new System.Drawing.Size(1579, 555);
+            this.Controls.Add(this.rtbGeneticLog);
+            this.Controls.Add(this.geneticAlgorithm);
             this.Controls.Add(this.lblOrdersLog);
             this.Controls.Add(this.rtbOrdersLog);
             this.Controls.Add(this.lblFertilizeStatusText);
@@ -173,6 +210,7 @@ namespace SZI
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.DoubleBuffered = true;
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MainWindow";
@@ -233,6 +271,8 @@ namespace SZI
         private Label lblFertilizeStatusText;
         private RichTextBox rtbOrdersLog;
         private Label lblOrdersLog;
+        private Button geneticAlgorithm;
+        private RichTextBox rtbGeneticLog;
     }
 }
 

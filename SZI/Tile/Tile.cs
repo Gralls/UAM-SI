@@ -5,14 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SZI.Genetics;
 
 namespace SZI
 {
-    public class TileContainer
+    public class TileContainer 
     {
         private TileContainer()
         {
         }
+
         private static TileContainer instance;
         public static TileContainer GetInstance()
         {
@@ -31,6 +33,19 @@ namespace SZI
         public Tile[,] GetTiles()
         {
             return allTiles;
+        }
+
+        public Tile[,] GetCopyOfTiles()
+        {
+            Tile[,] newTiles = new Tile[xSize, ySize];
+            for(int y = 0; y < ySize; y++)
+            {
+                for(int x = 0; x < xSize; x++)
+                {
+                    newTiles[x, y] = allTiles[x, y].Clone();
+                }
+            }
+            return newTiles;
         }
 
         public void ClearTilesRotationExceptPlayerLocation()
@@ -81,16 +96,19 @@ namespace SZI
             if (x < 0 || x >= xSize
                 || y < 0 || y >= ySize)
                 return null;
-            return allTiles[x,y];
+            return allTiles[x, y];
         }
 
         public Tile FindTile(Location pos)
         {
             return FindTile(pos.x, pos.y);
         }
+
         private int xSize { get; set; }
         private int ySize { get; set; }
         private Tile[,] allTiles { get; set; }
+
+       
     }
 
     //This will be class for having informations about every tile.
@@ -107,6 +125,8 @@ namespace SZI
         public RotationEnum rotationOfPlayer { get; set; }
         public Plant plant { get; set; }
         public FertilizeStatus fertilizeStatus { get; set; }
+        private int[] genes;
+
         public void SetTerrainType(ITerrainType value)
         {
             if (terrainType != null)
@@ -135,7 +155,7 @@ namespace SZI
             fertilizeStatus.NextTurn();
         }
 
-        public void ChangeTerrain (string terrainName)
+        public void ChangeTerrain(string terrainName)
         {
             tileBackgroundName = terrainName;
             terrainType = TerrainFactory.GetInst().GetTerrainTypeFromTerrainName(terrainName);
@@ -156,6 +176,54 @@ namespace SZI
         {
             tileBackgroundName = TileImageLoader.GetInstance().GetRandomImageNameCorrespondingToTerrainType(terrainType.type);
             Notify();
+        }
+        public Plant.PlantTypesEnum GetPlantType()
+        {
+            return plant.plantType;
+        }
+
+        public string getPlantTypeName()
+        {
+            string plantName;
+            switch (plant.plantType)
+            {
+                case Plant.PlantTypesEnum.beetroot:
+                    plantName = "Burak";
+                    break;
+                case Plant.PlantTypesEnum.walnut:
+                    plantName = "Orzech";
+                    break;
+                case Plant.PlantTypesEnum.carrot:
+                    plantName = "Marchew";
+                    break;
+                case Plant.PlantTypesEnum.flower:
+                    plantName = "Kwiat";
+                    break;
+                case Plant.PlantTypesEnum.empty:
+                    plantName = "Pusto";
+                    break;
+                case Plant.PlantTypesEnum.road:
+                    plantName = "Droga";
+                    break;
+                default:
+                    plantName = "";
+                    break;
+            }
+            return plantName;
+        }
+        public void SetPlantType(Plant.PlantTypesEnum value)
+        {
+            plant.plantType = value;
+        }
+
+        public void GeneratePlants()
+        {
+            plant = new Plant(terrainType.type == TerrainFactory.TerrainTypesEnum.road);
+        }
+
+        public override string ToString()
+        {
+            return getPlantTypeName();
         }
     }
 }

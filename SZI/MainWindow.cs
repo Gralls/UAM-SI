@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SZI.AstarNamespace;
-
+using SZI.Genetics;
 namespace SZI
 {
     public partial class MainWindow : Form
@@ -25,7 +25,7 @@ namespace SZI
         {
             rtbOrdersLog.Text = orders + "\n" + rtbOrdersLog.Text;
         }
-        
+
         public void AddLinesToOrdersLog(List<string> orders)
         {
             if (orders == null)
@@ -33,7 +33,17 @@ namespace SZI
             foreach (string str in orders)
                 AddLinesToOrdersLog(str);
         }
-
+        public void AddLinesToGeneticsLog(List<string> results)
+        {
+            if (results == null)
+                return;
+            foreach (string str in results)
+                AddLinesToGeneticsLog(str);
+        }
+        public void AddLinesToGeneticsLog(string orders)
+        {
+            rtbGeneticLog.Text = orders + "\n" + rtbGeneticLog.Text;
+        }
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
@@ -47,7 +57,7 @@ namespace SZI
         private void MainWindow_Load(object sender, EventArgs e)
         {
 
-           
+
         }
 
         private Location ConvertPositionToLocation(System.Drawing.Point position)
@@ -65,7 +75,6 @@ namespace SZI
             {
                 lblPlantStatusText.Text = "nie dotyczy";
                 lblFertilizeStatusText.Text = "nie dotyczy";
-
             }
             else
             {
@@ -99,6 +108,7 @@ namespace SZI
                 Location target = ConvertPositionToLocation(button.Location);
                 MainLogic.Instance.MovePlayer(TileContainer.GetInstance().FindTile(target));
             }
+
         }
 
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
@@ -114,6 +124,37 @@ namespace SZI
         private void btnRerollMap_Click(object sender, EventArgs e)
         {
             InitializeGrids();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblTerrainTypeText_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            List<string> logs = MainLogic.Instance.GenerateBestPopulation();
+            AddLinesToGeneticsLog(logs);
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }
