@@ -207,5 +207,25 @@ namespace SZI
         {
 
         }
+
+        
+        private async void pictureBox1_Click(object sender, EventArgs e)
+        {
+            PictureBox box = (PictureBox)sender;
+            String fileName = @MainLogic.Instance.GenerateWeatherImage();
+            box.Image = Image.FromFile(fileName);
+            this.lblRecognizedWeatherTypeText.Text = "wait...";
+            WeatherRecognition wr = new WeatherRecognition();
+            String result = "";
+            await Task.Run(() =>
+            {
+                result = wr.recognizeWeather(fileName);
+            });
+            this.lblRecognizedWeatherTypeInfo.Visible = true;
+            this.lblRecognizedWeatherTypeText.Text = result;
+            this.lblRecognizedWeatherTypeText.Visible = true;
+
+        }
+
     }
 }

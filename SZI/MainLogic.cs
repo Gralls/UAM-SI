@@ -135,5 +135,14 @@ namespace SZI
         }
 
       
+        public string GenerateWeatherImage()
+        {
+            Random rand = new Random();
+            int type = rand.Next(0, 4); 
+            String fileName = TileImageLoader.GetInstance().GetRandomWeatherImageName((TileImageLoader.WeatherTypes)type);
+            return fileName;
+        }
+
+
     }
 }

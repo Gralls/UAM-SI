@@ -47,7 +47,11 @@ namespace SZI
             this.Recognize = new System.Windows.Forms.Button();
             this.lblRecognizedTerrainTypeInfo = new System.Windows.Forms.Label();
             this.lblRecognizedTerrainTypeText = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lblRecognizedWeatherTypeInfo = new System.Windows.Forms.Label();
+            this.lblRecognizedWeatherTypeText = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // fileToolStripMenuItem
@@ -217,6 +221,39 @@ namespace SZI
             this.lblRecognizedTerrainTypeText.Visible = false;
             this.lblRecognizedTerrainTypeText.Click += new System.EventHandler(this.label1_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.pictureBox1.Location = new System.Drawing.Point(447, 25);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(111, 110);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 18;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // lblRecognizedWeatherTypeInfo
+            // 
+            this.lblRecognizedWeatherTypeInfo.AutoSize = true;
+            this.lblRecognizedWeatherTypeInfo.Location = new System.Drawing.Point(565, 25);
+            this.lblRecognizedWeatherTypeInfo.Name = "lblRecognizedWeatherTypeInfo";
+            this.lblRecognizedWeatherTypeInfo.Size = new System.Drawing.Size(67, 13);
+            this.lblRecognizedWeatherTypeInfo.TabIndex = 19;
+            this.lblRecognizedWeatherTypeInfo.Text = "Recognized:";
+            this.lblRecognizedWeatherTypeInfo.Visible = false;
+            this.lblRecognizedWeatherTypeInfo.Click += new System.EventHandler(this.label1_Click_1);
+            // 
+            // lblRecognizedWeatherTypeText
+            // 
+            this.lblRecognizedWeatherTypeText.AutoSize = true;
+            this.lblRecognizedWeatherTypeText.Location = new System.Drawing.Point(638, 25);
+            this.lblRecognizedWeatherTypeText.Name = "lblRecognizedWeatherTypeText";
+            this.lblRecognizedWeatherTypeText.Size = new System.Drawing.Size(96, 13);
+            this.lblRecognizedWeatherTypeText.TabIndex = 20;
+            this.lblRecognizedWeatherTypeText.Text = "Not recognized yet";
+            this.lblRecognizedWeatherTypeText.Visible = false;
+            this.lblRecognizedWeatherTypeText.Click += new System.EventHandler(this.label2_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -225,9 +262,12 @@ namespace SZI
             this.ClientSize = new System.Drawing.Size(1202, 514);
             this.Controls.Add(this.rtbGeneticLog);
             this.Controls.Add(this.geneticAlgorithm);
+            
+            this.Controls.Add(this.lblRecognizedWeatherTypeText);
+            this.Controls.Add(this.lblRecognizedWeatherTypeInfo);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lblRecognizedTerrainTypeText);
             this.Controls.Add(this.lblRecognizedTerrainTypeInfo);
-            this.Controls.Add(this.Recognize);
             this.Controls.Add(this.lblOrdersLog);
             this.Controls.Add(this.rtbOrdersLog);
             this.Controls.Add(this.lblFertilizeStatusText);
@@ -248,6 +288,7 @@ namespace SZI
             this.Load += new System.EventHandler(this.MainWindow_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -293,6 +334,7 @@ namespace SZI
         }
 
         private Button btnRerollMap;
+        private Button Recognize;
         private Label lblTerrainTypeInfo;
         private Label lblTerrainTypeText;
         private Label lblPlantStatusInfo;
@@ -301,11 +343,13 @@ namespace SZI
         private Label lblFertilizeStatusText;
         private RichTextBox rtbOrdersLog;
         private Label lblOrdersLog;
-        private Button Recognize;
         private Label lblRecognizedTerrainTypeInfo;
         private Label lblRecognizedTerrainTypeText;
         private Button geneticAlgorithm;
         private RichTextBox rtbGeneticLog;
+        private PictureBox pictureBox1;
+        private Label lblRecognizedWeatherTypeInfo;
+        private Label lblRecognizedWeatherTypeText;
     }
 }
 

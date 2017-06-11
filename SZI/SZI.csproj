@@ -102,6 +102,7 @@
     <Compile Include="Genetics\Population.cs" />
     <Compile Include="RandomStaticProvider.cs" />
     <Compile Include="ImageRecognition\PythonExecuter.cs" />
+    <Compile Include="ImageRecognition\WeatherRecognition.cs" />
     <Compile Include="ImageRecognition\TileRecognition.cs" />
     <Compile Include="Tile\Coordinates.cs" />
     <Compile Include="ID3\ID3.cs" />
