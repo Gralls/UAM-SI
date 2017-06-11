@@ -42,6 +42,8 @@ namespace SZI
             this.lblFertilizeStatusText = new System.Windows.Forms.Label();
             this.rtbOrdersLog = new System.Windows.Forms.RichTextBox();
             this.lblOrdersLog = new System.Windows.Forms.Label();
+            this.geneticAlgorithm = new System.Windows.Forms.Button();
+            this.rtbGeneticLog = new System.Windows.Forms.RichTextBox();
             this.Recognize = new System.Windows.Forms.Button();
             this.lblRecognizedTerrainTypeInfo = new System.Windows.Forms.Label();
             this.lblRecognizedTerrainTypeText = new System.Windows.Forms.Label();
@@ -66,19 +68,20 @@ namespace SZI
             // 
             // menuStrip1
             // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(781, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1202, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // btnRerollMap
             // 
-            this.btnRerollMap.Location = new System.Drawing.Point(504, 81);
+            this.btnRerollMap.Location = new System.Drawing.Point(694, 27);
             this.btnRerollMap.Name = "btnRerollMap";
-            this.btnRerollMap.Size = new System.Drawing.Size(91, 23);
+            this.btnRerollMap.Size = new System.Drawing.Size(75, 23);
             this.btnRerollMap.TabIndex = 2;
             this.btnRerollMap.Text = "Reroll";
             this.btnRerollMap.UseVisualStyleBackColor = true;
@@ -88,7 +91,7 @@ namespace SZI
             // lblTerrainTypeInfo
             // 
             this.lblTerrainTypeInfo.AutoSize = true;
-            this.lblTerrainTypeInfo.Location = new System.Drawing.Point(610, 69);
+            this.lblTerrainTypeInfo.Location = new System.Drawing.Point(633, 81);
             this.lblTerrainTypeInfo.Name = "lblTerrainTypeInfo";
             this.lblTerrainTypeInfo.Size = new System.Drawing.Size(61, 13);
             this.lblTerrainTypeInfo.TabIndex = 5;
@@ -97,16 +100,17 @@ namespace SZI
             // lblTerrainTypeText
             // 
             this.lblTerrainTypeText.AutoSize = true;
-            this.lblTerrainTypeText.Location = new System.Drawing.Point(678, 69);
+            this.lblTerrainTypeText.Location = new System.Drawing.Point(701, 81);
             this.lblTerrainTypeText.Name = "lblTerrainTypeText";
             this.lblTerrainTypeText.Size = new System.Drawing.Size(10, 13);
             this.lblTerrainTypeText.TabIndex = 7;
             this.lblTerrainTypeText.Text = " ";
+            this.lblTerrainTypeText.Click += new System.EventHandler(this.lblTerrainTypeText_Click);
             // 
             // lblPlantStatusInfo
             // 
             this.lblPlantStatusInfo.AutoSize = true;
-            this.lblPlantStatusInfo.Location = new System.Drawing.Point(610, 86);
+            this.lblPlantStatusInfo.Location = new System.Drawing.Point(636, 98);
             this.lblPlantStatusInfo.Name = "lblPlantStatusInfo";
             this.lblPlantStatusInfo.Size = new System.Drawing.Size(44, 13);
             this.lblPlantStatusInfo.TabIndex = 8;
@@ -116,7 +120,7 @@ namespace SZI
             // lblPlantStatusText
             // 
             this.lblPlantStatusText.AutoSize = true;
-            this.lblPlantStatusText.Location = new System.Drawing.Point(678, 86);
+            this.lblPlantStatusText.Location = new System.Drawing.Point(701, 98);
             this.lblPlantStatusText.Name = "lblPlantStatusText";
             this.lblPlantStatusText.Size = new System.Drawing.Size(10, 13);
             this.lblPlantStatusText.TabIndex = 9;
@@ -125,7 +129,7 @@ namespace SZI
             // lblFertilizeStatusInfo
             // 
             this.lblFertilizeStatusInfo.AutoSize = true;
-            this.lblFertilizeStatusInfo.Location = new System.Drawing.Point(610, 103);
+            this.lblFertilizeStatusInfo.Location = new System.Drawing.Point(636, 115);
             this.lblFertilizeStatusInfo.Name = "lblFertilizeStatusInfo";
             this.lblFertilizeStatusInfo.Size = new System.Drawing.Size(61, 13);
             this.lblFertilizeStatusInfo.TabIndex = 10;
@@ -134,7 +138,7 @@ namespace SZI
             // lblFertilizeStatusText
             // 
             this.lblFertilizeStatusText.AutoSize = true;
-            this.lblFertilizeStatusText.Location = new System.Drawing.Point(678, 103);
+            this.lblFertilizeStatusText.Location = new System.Drawing.Point(701, 115);
             this.lblFertilizeStatusText.Name = "lblFertilizeStatusText";
             this.lblFertilizeStatusText.Size = new System.Drawing.Size(10, 13);
             this.lblFertilizeStatusText.TabIndex = 11;
@@ -159,11 +163,31 @@ namespace SZI
             this.lblOrdersLog.TabIndex = 13;
             this.lblOrdersLog.Text = "Log rozkazów:";
             // 
+            // geneticAlgorithm
+            // 
+            this.geneticAlgorithm.Location = new System.Drawing.Point(883, 128);
+            this.geneticAlgorithm.Name = "geneticAlgorithm";
+            this.geneticAlgorithm.Size = new System.Drawing.Size(147, 23);
+            this.geneticAlgorithm.TabIndex = 16;
+            this.geneticAlgorithm.Text = "Znajdź najlepsze rozłożenie";
+            this.geneticAlgorithm.UseVisualStyleBackColor = true;
+            this.geneticAlgorithm.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // rtbGeneticLog
+            // 
+            this.rtbGeneticLog.Location = new System.Drawing.Point(775, 154);
+            this.rtbGeneticLog.Name = "rtbGeneticLog";
+            this.rtbGeneticLog.ReadOnly = true;
+            this.rtbGeneticLog.Size = new System.Drawing.Size(350, 222);
+            this.rtbGeneticLog.TabIndex = 19;
+            this.rtbGeneticLog.Text = "";
+            // 
             // Recognize
             // 
-            this.Recognize.Location = new System.Drawing.Point(504, 105);
+            this.Recognize.Location = new System.Drawing.Point(883, 104);
+            this.Recognize.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Recognize.Name = "Recognize";
-            this.Recognize.Size = new System.Drawing.Size(91, 23);
+            this.Recognize.Size = new System.Drawing.Size(68, 19);
             this.Recognize.TabIndex = 14;
             this.Recognize.Text = "Recognize tiles";
             this.Recognize.UseVisualStyleBackColor = true;
@@ -172,7 +196,8 @@ namespace SZI
             // lblRecognizedTerrainTypeInfo
             // 
             this.lblRecognizedTerrainTypeInfo.AutoSize = true;
-            this.lblRecognizedTerrainTypeInfo.Location = new System.Drawing.Point(610, 128);
+            this.lblRecognizedTerrainTypeInfo.Location = new System.Drawing.Point(636, 133);
+            this.lblRecognizedTerrainTypeInfo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblRecognizedTerrainTypeInfo.Name = "lblRecognizedTerrainTypeInfo";
             this.lblRecognizedTerrainTypeInfo.Size = new System.Drawing.Size(119, 13);
             this.lblRecognizedTerrainTypeInfo.TabIndex = 15;
@@ -184,7 +209,8 @@ namespace SZI
             // lblRecognizedTerrainTypeText
             // 
             this.lblRecognizedTerrainTypeText.AutoSize = true;
-            this.lblRecognizedTerrainTypeText.Location = new System.Drawing.Point(758, 128);
+            this.lblRecognizedTerrainTypeText.Location = new System.Drawing.Point(772, 133);
+            this.lblRecognizedTerrainTypeText.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblRecognizedTerrainTypeText.Name = "lblRecognizedTerrainTypeText";
             this.lblRecognizedTerrainTypeText.Size = new System.Drawing.Size(0, 13);
             this.lblRecognizedTerrainTypeText.TabIndex = 16;
@@ -196,7 +222,9 @@ namespace SZI
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(781, 451);
+            this.ClientSize = new System.Drawing.Size(1202, 514);
+            this.Controls.Add(this.rtbGeneticLog);
+            this.Controls.Add(this.geneticAlgorithm);
             this.Controls.Add(this.lblRecognizedTerrainTypeText);
             this.Controls.Add(this.lblRecognizedTerrainTypeInfo);
             this.Controls.Add(this.Recognize);
@@ -276,6 +304,8 @@ namespace SZI
         private Button Recognize;
         private Label lblRecognizedTerrainTypeInfo;
         private Label lblRecognizedTerrainTypeText;
+        private Button geneticAlgorithm;
+        private RichTextBox rtbGeneticLog;
     }
 }
 

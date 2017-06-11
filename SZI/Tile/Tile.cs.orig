@@ -125,9 +125,12 @@ namespace SZI
         public RotationEnum rotationOfPlayer { get; set; }
         public Plant plant { get; set; }
         public FertilizeStatus fertilizeStatus { get; set; }
+<<<<<<< HEAD
+        public ITerrainType recognizedTerrainType { get; set; }
+=======
         private int[] genes;
 
-        public ITerrainType recognizedTerrainType { get; set; }
+>>>>>>> f4516fab731fe61609065a9a34737cbf44818ceb
         public void SetTerrainType(ITerrainType value)
         {
             if (terrainType != null)

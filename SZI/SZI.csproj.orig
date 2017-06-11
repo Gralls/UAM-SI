@@ -96,13 +96,16 @@
     <Compile Include="ButtonWithTile.cs">
       <SubType>Component</SubType>
     </Compile>
+<<<<<<< HEAD
+    <Compile Include="ImageRecognition\PythonExecuter.cs" />
+    <Compile Include="ImageRecognition\TileRecognition.cs" />
+=======
     <Compile Include="Genetics\FitnessCalc.cs" />
     <Compile Include="Genetics\GeneticAlgorithm.cs" />
     <Compile Include="Genetics\Individual.cs" />
     <Compile Include="Genetics\Population.cs" />
     <Compile Include="RandomStaticProvider.cs" />
-    <Compile Include="ImageRecognition\PythonExecuter.cs" />
-    <Compile Include="ImageRecognition\TileRecognition.cs" />
+>>>>>>> f4516fab731fe61609065a9a34737cbf44818ceb
     <Compile Include="Tile\Coordinates.cs" />
     <Compile Include="ID3\ID3.cs" />
     <Compile Include="MainLogic.cs" />
