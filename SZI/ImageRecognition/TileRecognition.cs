@@ -8,7 +8,7 @@ namespace SZI.ImageRecognition
 {
     public class TileRecognition
     {
-        private static String commandForImageRecognition = "C:\\Users\\worad\\tf_files\\label_image.py";
+        private static String commandForImageRecognition = "C:\\Useful\\PythonPackages\\tf_files\\label_image.py";
         
         public TileRecognition()
         {
